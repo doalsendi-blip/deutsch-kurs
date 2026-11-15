@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deutsch für den Beruf · A1→A2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+__CSS__
+/* ---- guided path ---- */
+.next{background:var(--ink);color:var(--bg);border-radius:var(--radius);padding:18px;margin:16px 0;display:block;text-decoration:none}
+.next .k{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+.next h2{font-size:24px;margin:6px 0 4px;color:var(--bg)}
+.next p{margin:0;opacity:.85;font-size:14px}
+.next .go{display:inline-block;margin-top:12px;background:var(--bg);color:var(--ink);padding:9px 16px;border-radius:10px;font-weight:600;font-size:15px}
+.next.warn{background:var(--warn)}
+.how ol{margin:6px 0 0;padding-left:20px}
+.how li{margin:5px 0;font-size:15px}
+.steps{display:grid;gap:8px;margin-top:10px}
+.srow{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--card);text-decoration:none;color:inherit}
+.srow .n{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:600;font-size:14px;background:var(--line);color:var(--muted);flex:none}
+.srow.pass .n{background:var(--ok);color:#fff}
+.srow.fail .n{background:var(--bad);color:#fff}
+.srow.cur{border-color:var(--ink);border-width:2px}
+.srow .t{flex:1;min-width:0}
+.srow .t b{display:block;font-size:15px}
+.srow .t span{font-size:12px;color:var(--muted)}
+.srow .g{font-size:13px;text-align:right;white-space:nowrap}
+.srow .g b{display:block;font-family:"Fraunces",Georgia,serif;font-size:17px}
+.task{border:2px solid var(--ink);border-radius:var(--radius);padding:14px 16px;margin:14px 0;background:var(--card)}
+.task .h{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.task ol{margin:6px 0 8px;padding-left:20px}
+.task li{margin:4px 0}
+.passline{font-size:14px;padding-top:8px;border-top:1px solid var(--line)}
+.passline b{color:var(--accent)}
+.result{border-radius:var(--radius);padding:16px;margin:18px 0;border:2px solid}
+.result.ok{border-color:var(--ok);background:var(--ok-bg)}
+.result.no{border-color:var(--bad);background:var(--bad-bg)}
+.result .big{font-family:"Fraunces",Georgia,serif;font-size:34px;line-height:1}
+.result p{margin:8px 0 0}
+.stephead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:16px;font-size:13px;color:var(--muted)}
+.prog{display:flex;gap:3px;margin-top:8px}
+.prog i{flex:1;height:5px;border-radius:3px;background:var(--line)}
+.prog i.pass{background:var(--ok)} .prog i.fail{background:var(--bad)} .prog i.cur{background:var(--ink)}
+table.grades{border-collapse:collapse;width:100%;font-size:14px}
+table.grades td,table.grades th{padding:7px 6px;border-bottom:1px solid var(--line);text-align:left}
+table.grades th{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+table.grades td.r{text-align:right;white-space:nowrap}
+.ok-t{color:var(--ok);font-weight:600} .no-t{color:var(--bad);font-weight:600}
+.lockmsg{font-size:13px;color:var(--muted)}
+input.score{width:80px;font:inherit;font-size:18px;padding:8px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);text-align:center}
+.selfgrade{display:none;gap:8px;margin-top:8px;align-items:center;font-size:14px}
+.selfgrade.on{display:flex}
+.chk{font-size:12px;font-weight:600}
+
+/* ---- game layer ---- */
+.hud{display:flex;gap:8px;align-items:stretch;margin:8px 0 4px}
+.hud .hb{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 10px;display:flex;flex-direction:column;justify-content:center;font-size:12px;color:var(--muted);min-width:64px}
+.hud .hb.grow{flex:1}
+.hud .big{font-family:"Fraunces",Georgia,serif;font-size:18px;color:var(--ink);font-weight:700}
+.hud .goalrow{display:flex;justify-content:space-between;margin-bottom:5px}
+.hud .goalrow b{color:var(--ink)}
+.xpfloat{position:fixed;right:18px;top:70px;background:var(--accent);color:#fff;font-weight:700;padding:5px 10px;border-radius:99px;font-size:14px;z-index:60;animation:xpup 1.1s ease-out forwards;pointer-events:none}
+@keyframes xpup{0%{opacity:0;transform:translateY(10px)}20%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-24px)}}
+#combo{position:fixed;left:50%;top:64px;transform:translateX(-50%) scale(.9);background:var(--warn);color:#fff;font-weight:700;padding:6px 14px;border-radius:99px;opacity:0;transition:all .2s;z-index:60;pointer-events:none}
+#combo.on{opacity:1;transform:translateX(-50%) scale(1)}
+.stars{color:#e0a000;font-size:22px;letter-spacing:2px}
+.stars.sm{font-size:12px;letter-spacing:0;display:block}
+.gamecard{display:flex;gap:12px;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin:12px 0}
+.gamecard h3{font-size:18px}
+.gamecard p{margin:4px 0;font-size:14px;color:var(--muted)}
+.game{margin-top:12px}
+.gtop{display:flex;justify-content:space-between;font-weight:600;font-size:16px;padding:10px 4px}
+.bzcard{background:var(--card);border:2px solid var(--line);border-radius:var(--radius);padding:30px 16px;text-align:center;transition:all .15s}
+.bzcard.ok{border-color:var(--ok);background:var(--ok-bg)} .bzcard.no{border-color:var(--bad);background:var(--bad-bg)}
+.bzw{font-family:"Fraunces",Georgia,serif;font-size:36px;font-weight:700}
+.bzen{color:var(--muted);margin-top:6px}
+.arts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.art{font-size:22px;font-weight:700;padding:18px 0;border-radius:14px;border:2px solid currentColor;background:var(--card)}
+.art:disabled{opacity:.4}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.pc{min-height:68px;border-radius:12px;border:1px solid var(--line);background:var(--card);font-size:14px;padding:6px;font-weight:500}
+.pc.de{border-left:4px solid var(--accent)}
+.pc.sel{border-color:var(--ink);border-width:2px;background:var(--accent-soft)}
+.pc.done{visibility:hidden}
+.pc.bad{background:var(--bad-bg);border-color:var(--bad)}
+/* ---- story ---- */
+.story .st-t{font-size:28px;margin-top:4px}
+.sent{display:grid;grid-template-columns:1fr auto;gap:4px 8px;padding:9px 6px;border-radius:10px;font-size:18px;line-height:1.55}
+.sent.now{background:var(--accent-soft)}
+.sent .sbtn{display:flex;gap:2px;align-items:flex-start}
+.sent .enb{border:1px solid var(--line);background:var(--card);border-radius:7px;font-size:11px;font-weight:600;padding:3px 6px;color:var(--muted)}
+.sent .en{grid-column:1/-1;display:none;font-size:14px;color:var(--muted)}
+.sent.showen .en,.allen .sent .en{display:block}
+.gw{font:inherit;color:inherit;background:none;border:none;padding:0;border-bottom:2px dotted var(--accent);cursor:pointer;line-height:1.2}
+#stBody{position:relative}
+.story{position:relative}
+.gpop{position:absolute;display:none;background:var(--ink);color:var(--bg);padding:7px 11px;border-radius:9px;font-size:14px;z-index:15;max-width:220px}
+.gpop.on{display:block}
+.tfq{font-size:18px;font-weight:500;margin:6px 0 10px}
+.setrow{display:flex;gap:10px;align-items:center;margin-top:10px;font-size:14px}
+.setrow label{width:60px;color:var(--muted)}
+.setrow select{flex:1;font:inherit;font-size:14px;padding:6px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.setrow input[type=range]{flex:1}
+@media (max-width:440px){.brand{display:none}nav.tabs{flex:1;justify-content:space-between}nav.tabs a{padding:6px 8px;font-size:13px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="brand">Deutsch für den Beruf<small>A1 → A2 · Goethe-Rahmen</small></div>
+  <nav class="tabs" id="tabs">
+    <a href="#heute" data-v="heute">Heute</a>
+    <a href="#spiele" data-v="spiele">Spiele</a>
+    <a href="#wiederholen" data-v="wiederholen">Review</a>
+    <a href="#noten" data-v="noten">Noten</a>
+    <a href="#info" data-v="info">Info</a>
+  </nav>
+</div></header>
+<main class="wrap" id="app"></main>
+<div class="toast" id="toast"></div>
+
+<script>
+const UNITS = __UNITS__;
+const SOUNDS = __SOUNDS__;
+const AUD = __AUD__;
+
+/* The fixed order of every unit. pass = minimum % to pass; null = not graded. */
+const STEPS = [
+  {k:"bruecke",  t:"Brücke",    en:"Words you already know",  min:15, pass:70},
+  {k:"woerter",  t:"Wörter",    en:"Vocabulary",              min:15, pass:75},
+  {k:"lesen",    t:"Lesen",     en:"Story + true/false",      min:15, pass:80},
+  {k:"hoeren",   t:"Hören",     en:"Listening + dictation",   min:20, pass:70},
+  {k:"denken",   t:"Denken",    en:"Build sentences",         min:15, pass:75},
+  {k:"grammatik",t:"Grammatik", en:"Grammar",                 min:10, pass:null},
+  {k:"ueben",    t:"Üben",      en:"Exercises",               min:15, pass:80},
+  {k:"tippen",   t:"Tippen",    en:"Typing",                  min:10, pass:90},
+  {k:"schreiben",t:"Schreiben", en:"Writing (Claude grades)", min:20, pass:60},
+  {k:"sprechen", t:"Sprechen",  en:"Speaking (Claude grades)",min:15, pass:60},
+];
+const UNIT_MIN = STEPS.reduce((a,s)=>a+s.min,0);
+
+/* ================= STATE ================= */
+let state={grades:{}, srs:{}, typing:{}, read:{}, xp:0, days:{}, stars:{}, hs:{}, settings:{engine:"auto", rate:1, voice:null}};
+function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+try{const s=JSON.parse(lsGet("dfb3-state")||"null"); if(s&&s.grades){ state=Object.assign(state,s); state.settings=Object.assign({engine:"auto",rate:1,voice:null},s.settings||{}); state.days=s.days||{}; state.stars=s.stars||{}; state.hs=s.hs||{}; state.xp=s.xp||0; }}catch(e){}
+function save(){ lsSet("dfb3-state",JSON.stringify(state)); }
+const gkey=(u,k)=>`u${u}-${k}`;
+function grade(u,k){ return state.grades[gkey(u,k)]||null; }
+function stepStatus(u,s){
+  if(s.pass===null) return state.read[gkey(u,s.k)]?"pass":"todo";
+  const g=grade(u,s.k); if(!g) return "todo";
+  return g.best>=s.pass?"pass":"fail";
+}
+function recordGrade(u,k,pct){
+  const key=gkey(u,k), g=state.grades[key]||{best:0,attempts:0};
+  g.last=pct; g.best=Math.max(g.best,pct); g.attempts++; g.date=new Date().toISOString().slice(0,10);
+  state.grades[key]=g; save(); return g;
+}
+function unitPassed(u){ return STEPS.every(s=>stepStatus(u.id,s)==="pass"); }
+function unitAvg(u){ const gs=STEPS.filter(s=>s.pass!==null).map(s=>grade(u.id,s.k)).filter(Boolean); return gs.length? Math.round(gs.reduce((a,g)=>a+g.best,0)/gs.length):null; }
+function unitUnlocked(u){ const i=UNITS.findIndex(x=>x.id===u.id); return i===0 || unitPassed(UNITS[i-1]); }
+function nextTask(){
+  for(const u of UNITS.filter(x=>x.full)){
+    if(unitPassed(u)) continue;
+    const i=STEPS.findIndex(s=>stepStatus(u.id,s)!=="pass");
+    return {u, i, s:STEPS[i], status:stepStatus(u.id,STEPS[i])};
+  }
+  return null;
+}
+
+/* ================= GAME LAYER: XP, daily goal, streak, stars, combo ================= */
+const GOAL=150;
+const todayKey=()=>{const d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");};
+function xpToday(){ return state.days[todayKey()]||0; }
+function streak(){ let n=0; const d=new Date(); if(!((state.days[todayKey()]||0)>=GOAL)) d.setDate(d.getDate()-1);
+  for(;;){ const k=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); if((state.days[k]||0)>=GOAL){ n++; d.setDate(d.getDate()-1);} else break; } return n; }
+const LEVELS=["Anfänger","Neuling","Lernender","Fortgeschritten","Kollege","Teamleiter","Profi","Experte","Meister","Goethe-Held"];
+function levelInfo(){ const x=state.xp; let L=0; while(400*(L+1)*(L+2)/2<=x) L++; const lo=400*L*(L+1)/2, hi=400*(L+1)*(L+2)/2; return {n:L+1, name:LEVELS[Math.min(L,LEVELS.length-1)], pct:Math.round(100*(x-lo)/(hi-lo)), toNext:hi-x}; }
+let combo=0;
+function addXP(n){ if(n<=0) return; const before=xpToday(), lvl=levelInfo().n; state.xp+=n; state.days[todayKey()]=before+n; save(); floatXP("+"+n+" XP");
+  if(before<GOAL && before+n>=GOAL) setTimeout(()=>toast(`Tagesziel erreicht! 🔥 ${streak()}-day streak`),500);
+  if(levelInfo().n>lvl) setTimeout(()=>toast(`Level ${levelInfo().n}: ${levelInfo().name}! 🎉`),900);
+  const hb=document.getElementById("hud"); if(hb) hb.outerHTML=hudHTML(); }
+function answered(ok){ if(ok){ combo++; addXP(10+(combo>=3?5:0)); if(combo>=3) showCombo(); } else { combo=0; hideCombo(); } }
+function floatXP(t){ const e=document.createElement("div"); e.className="xpfloat"; e.textContent=t; document.body.appendChild(e); setTimeout(()=>e.remove(),1100); }
+function showCombo(){ let c=document.getElementById("combo"); if(!c){ c=document.createElement("div"); c.id="combo"; document.body.appendChild(c);} c.textContent=`🔥 Combo ×${combo}`; c.classList.add("on"); clearTimeout(c._h); c._h=setTimeout(()=>c.classList.remove("on"),1800); }
+function hideCombo(){ const c=document.getElementById("combo"); if(c) c.classList.remove("on"); }
+function starsFor(pct,pass){ if(pass===null||pct==null) return 0; return pct>=100?3:pct>=90?2:pct>=pass?1:0; }
+const starStr=n=>"★".repeat(n)+"☆".repeat(3-n);
+function hudHTML(){ const L=levelInfo(), t=xpToday(), st=streak();
+  return `<div class="hud" id="hud"><div class="hb"><span class="big">🔥 ${st}</span><span>day streak</span></div>
+    <div class="hb grow"><div class="goalrow"><span>Today <b>${Math.min(t,GOAL)}/${GOAL} XP</b></span>${t>=GOAL?`<span class="ok-t">✓ goal</span>`:""}</div><div class="bar"><i style="width:${Math.min(100,Math.round(100*t/GOAL))}%"></i></div></div>
+    <div class="hb"><span class="big">L${L.n}</span><span>${L.name}</span></div></div>`; }
+
+/* ================= AUDIO =================
+   1st choice: the device's own German voice (Edge natural voices, Google Deutsch in Chrome, Apple voices on iPhone).
+   Fallback: the course's pre-recorded files. Roles: F narrator, W Herr Weber, M Herr Miller, R second speaker. */
+const player=new Audio(); player.preload="auto";
+let seq=[], seqCb=null, curBtn=null, VOICES=[], seqToken=0;
+const FEMALE=/katja|amala|hedda|anna|helena|petra|marlene|vicki|seraphina|louisa|tanja|elke|gisela|klarissa|maja|ilse|sabine|leonie|jana|marie|google deutsch|ingrid|elsa/i;
+const MALE=/conrad|killian|stefan|markus|martin|yannick|viktor|florian|bernd|christoph|ralf|kasper|hans|jonas|lukas|klaus|björn|bjorn/i;
+const NOVELTY=/eloquence|grandma|grandpa|rocko|shelley|flo\b|eddy|reed|sandy|bad news|bells|boing|bubbles|cellos|jester|organ|superstar|trinoids|whisper|wobble|zarvox|albert|bahh/i;
+function voiceScore(v){ let s=0, n=v.name; if(/natural|neural|online/i.test(n)) s+=50; if(/premium|enhanced|erweitert|verbessert/i.test(n)) s+=40; if(/google/i.test(n)) s+=35;
+  if(v.lang==="de-DE"||v.lang==="de_DE") s+=10; else s+=2; if(NOVELTY.test(n)) s-=100; return s; }
+function loadVoices(){ try{ VOICES=speechSynthesis.getVoices().filter(v=>/^de([-_]|$)/i.test(v.lang)&&voiceScore(v)>-50).sort((a,b)=>voiceScore(b)-voiceScore(a)); }catch(e){ VOICES=[]; } }
+if("speechSynthesis" in window){ loadVoices(); try{ speechSynthesis.addEventListener("voiceschanged",()=>{ loadVoices(); const el=document.getElementById("audioInfo"); if(el) el.innerHTML=audioInfoHTML(); }); }catch(e){} }
+function useDevice(){ const m=(state.settings||{}).engine||"auto"; if(m==="files") return false; return VOICES.length>0; }
+function roleVoice(role){
+  if(!VOICES.length) return {v:null,p:1};
+  const chosen=state.settings.voice && VOICES.find(x=>x.name===state.settings.voice);
+  const fem=VOICES.filter(v=>FEMALE.test(v.name)&&!MALE.test(v.name)), mal=VOICES.filter(v=>MALE.test(v.name));
+  const narr=chosen||fem[0]||VOICES[0];
+  if(role==="W") return mal[0]?{v:mal[0],p:1}:{v:narr,p:.85};
+  if(role==="M") return mal[1]?{v:mal[1],p:1}:mal[0]?{v:mal[0],p:.88}:{v:narr,p:.75};
+  if(role==="R") return fem[1]?{v:fem[1],p:1}:{v:narr,p:1.1};
+  return {v:narr,p:1};
+}
+function speechText(t){ return t.replace(/\s*\/\s*/g,", ").replace(/[„“"‚‘]/g,"").replace(/…/g,"").trim(); }
+function speakDevice(text,role,done){
+  const rv=roleVoice(role), parts=speechText(text).match(/[^.!?]+[.!?]*/g)||[text], tok=++seqToken;
+  const short=text.trim().split(/\s+/).length<=3, rate=(short?.78:.9)*(state.settings.rate||1);
+  let i=0; const next=()=>{ if(tok!==seqToken) return; if(i>=parts.length){ done&&done(); return; }
+    const u=new SpeechSynthesisUtterance(parts[i++].trim()); if(rv.v){u.voice=rv.v; u.lang=rv.v.lang;} else u.lang="de-DE";
+    u.rate=rate; u.pitch=rv.p; u.onend=()=>setTimeout(next,short?250:120); u.onerror=()=>{ if(tok===seqToken) done&&done(); };
+    speechSynthesis.speak(u); };
+  next();
+}
+function ttsKey(t){return t.replace(/\s*\/\s*/g,", ").replace(/[„“"]/g,"").replace(/…/g,"").trim();}
+function fileFor(text,v){ const t=ttsKey(text), r=v==="W"?"F":(v||"F"); return AUD[r+"|"+t]||AUD["F|"+t]||AUD["M|"+t]||AUD["R|"+t]||null; }
+function setPlaying(b){ if(curBtn) curBtn.classList.remove("playing"); curBtn=b||null; if(curBtn) curBtn.classList.add("playing"); }
+function play(text,v,btn,done){
+  stopAudio(true); setPlaying(btn);
+  const fin=()=>{ setPlaying(null); done&&done(); };
+  if(useDevice()){ speakDevice(text,v||"F",fin); return; }
+  const f=fileFor(text,v); if(!f){ fin(); return; }
+  player.onended=fin; player.src=f; const p=player.play(); if(p&&p.catch) p.catch(fin);
+}
+function playSeq(items,onLine){ stopAudio(true); seq=items.slice(); seqCb=onLine; nextSeq(); }
+function nextSeq(){
+  const it=seq.shift();
+  if(!it){ const cb=seqCb; seqCb=null; if(cb) cb(-1); setPlaying(null); return; }
+  if(seqCb) seqCb(it.i);
+  const go=()=>setTimeout(()=>{ if(seqCb) nextSeq(); }, it.gap||600);
+  if(useDevice()){ speakDevice(it.t,it.v||"F",go); return; }
+  const f=fileFor(it.t,it.v); if(!f){ go(); return; }
+  player.onended=go; player.src=f; const p=player.play(); if(p&&p.catch) p.catch(go);
+}
+function stopAudio(silent){ seq=[]; seqToken++; try{player.pause(); player.onended=null;}catch(e){} try{ if("speechSynthesis" in window) speechSynthesis.cancel(); }catch(e){} const cb=seqCb; seqCb=null; if(cb&&!silent) cb(-1); else if(cb) cb(-1); setPlaying(null); }
+function spk(text,v){return `<button class="spk" aria-label="Anhören" data-say="${esc(text)}" data-v="${v||"F"}">🔊</button>`;}
+function audioInfoHTML(){
+  if(useDevice()){ const v=roleVoice("F").v; return `Using your device's voice: <b>${esc(v.name)}</b>.`; }
+  if((state.settings.engine||"auto")==="files") return `Using the course recordings.`;
+  return `<b>This browser has no German voice</b>, so the page is using the course's backup recordings, which sound robotic. For natural audio, open this page in <b>Microsoft Edge</b> (best) or <b>Chrome</b>, or on your iPhone.`;
+}
+
+/* ================= HELPERS ================= */
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function toast(m){const t=$("#toast"); t.textContent=m; t.classList.add("on"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("on"),2200);}
+function fold(s){return s.toLowerCase().replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/ß/g,"ss");}
+function normS(s){return fold(s.trim()).replace(/[.?!,;:–]/g," ").replace(/\s+/g," ").trim();}
+function stripArt(s){return s.replace(/^(der|die|das)\s+/i,"");}
+function shuffle(a){const b=a.slice(); for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [b[i],b[j]]=[b[j],b[i]];} return b;}
+function gc(g){return {m:"g-m",f:"g-f",n:"g-n",p:"g-p"}[g]||"";}
+function umlBar(){return `<div class="uml">${["ä","ö","ü","ß"].map(c=>`<button type="button" data-c="${c}">${c}</button>`).join("")}</div>`;}
+function wireUml(root,input){ $$(".uml button",root).forEach(b=>b.onclick=()=>{const s=input.selectionStart??input.value.length; input.value=input.value.slice(0,s)+b.dataset.c+input.value.slice(input.selectionEnd??s); input.focus(); try{input.setSelectionRange(s+1,s+1);}catch(e){} input.dispatchEvent(new Event("input"));}); }
+const TX=`type="text" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false"`;
+async function copyText(text,box){ try{await navigator.clipboard.writeText(text); toast("Copied — paste it into a new Claude chat");}catch(e){ if(box){box.textContent=text; box.classList.add("on");} toast("Select the text below and copy it"); } }
+function wordDiff(target,typed){
+  const T=target.replace(/[.?!,;:]/g,"").split(/\s+/).filter(Boolean), Y=typed.replace(/[.?!,;:]/g,"").split(/\s+/).filter(Boolean);
+  const n=T.length,m=Y.length,L=Array.from({length:n+1},()=>Array(m+1).fill(0));
+  for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--) L[i][j]=fold(T[i])===fold(Y[j])?L[i+1][j+1]+1:Math.max(L[i+1][j],L[i][j+1]);
+  let i=0,j=0,out=[],ok=0,soft=0;
+  while(i<n||j<m){
+    if(i<n&&j<m&&fold(T[i])===fold(Y[j])){ if(T[i]===Y[j]) out.push(`<span class="w-ok">${esc(Y[j])}</span>`); else {soft++; out.push(`<span class="w-case">${esc(Y[j])} → ${esc(T[i])}</span>`);} ok++; i++; j++; }
+    else if(j<m&&(i>=n||L[i][j+1]>=L[i+1][j])){ out.push(`<span class="w-bad">${esc(Y[j])}</span>`); j++; }
+    else { out.push(`<span class="w-miss">${esc(T[i])}</span>`); i++; }
+  }
+  return {html:out.join(" "), perfect:ok===n&&m===n&&!soft, close:ok===n&&m===n};
+}
+
+/* ================= HOME (HEUTE) ================= */
+function srsCards(){ const out=[]; UNITS.filter(u=>u.full).forEach(u=>u.vocab.forEach((v,k)=>{const id=`u${u.id}-v${k}`; if(state.srs[id]) out.push({id,v,u:u.id,s:state.srs[id]});})); return out; }
+function srsDue(){ const now=Date.now(); return srsCards().filter(c=>c.s.due<=now); }
+function viewHome(){
+  const due=srsDue().length, nt=nextTask();
+  let first="";
+  if(due) first=`<a class="next warn" href="#wiederholen"><div class="k">First · every day</div><h2>Review: ${due} card${due>1?"s":""}</h2><p>About ${Math.max(2,Math.round(due*0.25))} minutes. Do this before anything else; it's what keeps old words from fading.</p><span class="go">Start review →</span></a>`;
+  let main="";
+  if(nt){
+    const redo=nt.status==="fail", g=grade(nt.u.id,nt.s.k);
+    main=`<a class="next" href="#unit-${nt.u.id}-${nt.i+1}"><div class="k">${due?"Then · ":""}Your next task</div>
+      <h2>Unit ${nt.u.id} · Step ${nt.i+1}: ${nt.s.t}</h2>
+      <p>${redo?`<b>Redo.</b> Your best is ${g.best}%; you need ${nt.s.pass}%.`:`${esc(nt.s.en)} · about ${nt.s.min} min${nt.s.pass!==null?` · pass mark ${nt.s.pass}%`:""}`}</p>
+      <span class="go">${redo?"Redo step":"Start"} →</span></a>`;
+  } else main=`<div class="card"><b>All built units are passed.</b> Tell Claude „Unit ${UNITS.filter(u=>u.full).length} bestanden, bitte nächste Unit“ and the next one gets built.</div>`;
+  const fullU=UNITS.filter(u=>u.full);
+  return `<div class="hero" style="padding-top:16px"><h1>Guten Tag, Zack.</h1></div>
+  ${hudHTML()}
+  ${first}${main}
+  <a class="gamecard" href="#spiele" style="text-decoration:none;color:inherit"><div><h3>🎮 Quick game</h3><p>Der · Die · Das Blitz or Paare: 2 minutes, and it counts toward today's goal.</p></div><span class="btn">Play →</span></a>
+  <div class="card small" id="audioInfo">${audioInfoHTML()}</div>
+  <div class="card how"><b>How this course works</b>
+    <ol>
+      <li><b>Every day, start with Review.</b> 5–10 minutes of flashcards for every word you've studied.</li>
+      <li><b>Then do your next task</b> (the black card above). Tasks go in a fixed order: ${STEPS.length} steps per unit, about ${Math.round(UNIT_MIN/5)*5} minutes in all.</li>
+      <li><b>Each step has a pass mark.</b> Below it, you redo that step before moving on. Your best score counts.</li>
+      <li><b>A unit is passed when all ${STEPS.length} steps are passed.</b> Then the next unit opens. Aim for one unit a week.</li>
+      <li><b>Earn XP</b> for every correct answer (bonus for 3+ in a row), stars for scores of 90% and 100%, and keep your 🔥 streak by hitting ${GOAL} XP a day.</li>
+      <li><b>Writing and speaking</b> are graded by Claude: you copy a prompt into a chat and enter the score Claude gives you.</li>
+    </ol>
+  </div>
+  <div class="sec-h">Your units</div>
+  <div class="units">${UNITS.map(u=>{
+    if(!u.full) return `<div class="unit locked"><div class="num">${u.id}</div><div class="t"><b>${esc(u.title)}</b><span>${esc(u.en)} · not built yet</span></div><span class="pill ${u.level.toLowerCase()}">${u.level}</span></div>`;
+    const passedN=STEPS.filter(s=>stepStatus(u.id,s)==="pass").length, open=unitUnlocked(u), avg=unitAvg(u);
+    return `<a class="unit ${open?"":"locked"}" href="#unit-${u.id}"><div class="num">${unitPassed(u)?"✓":u.id}</div><div class="t"><b>${esc(u.title)}</b><span>${open?`${passedN} of ${STEPS.length} steps passed${avg!=null?` · average ${avg}%`:""}`:`Opens when Unit ${u.id-1} is passed`}</span></div><span class="pill ${u.level.toLowerCase()}">${u.level}</span></a>`;
+  }).join("")}</div>`;
+}
+
+/* ================= UNIT OVERVIEW ================= */
+function viewUnit(u){
+  const open=unitUnlocked(u), nt=nextTask();
+  return `<a class="back" href="#heute">← Heute</a>
+  <div class="hero" style="padding-top:10px"><span class="pill ${u.level.toLowerCase()}">Unit ${u.id} · ${u.level}</span>
+    <h1 style="margin-top:8px">${esc(u.title)}</h1><p>${esc(u.en)} · about ${Math.round(UNIT_MIN/5)*5} min in ${STEPS.length} steps</p></div>
+  ${open?"":`<div class="card lockmsg">This unit opens when Unit ${u.id-1} is passed. You can look ahead, but grades here won't help until then.</div>`}
+  <div class="card"><b>After this unit you can:</b><ul class="goals">${u.goals.map(g=>`<li>${esc(g)}</li>`).join("")}</ul></div>
+  <div class="sec-h">Steps — do them in order</div>
+  <div class="steps">${STEPS.map((s,i)=>{
+    const st=stepStatus(u.id,s), g=grade(u.id,s.k), cur=nt&&nt.u.id===u.id&&nt.i===i;
+    const right= s.pass===null? (st==="pass"?`<span class="ok-t">Read ✓</span>`:`<span class="muted">not graded</span>`)
+      : g? `<b class="${st==="pass"?"ok-t":"no-t"}">${g.best}%</b>${st==="pass"?`<span class="stars sm">${starStr(state.stars[gkey(u.id,s.k)]||0)}</span>`:`need ${s.pass}%`}` : `<span class="muted">pass ${s.pass}%</span>`;
+    return `<a class="srow ${st} ${cur?"cur":""}" href="#unit-${u.id}-${i+1}"><div class="n">${st==="pass"?"✓":st==="fail"?"!":i+1}</div><div class="t"><b>${s.t}</b><span>${esc(s.en)} · ${s.min} min${cur?" · <b>next</b>":""}</span></div><div class="g">${right}</div></a>`;
+  }).join("")}</div>
+  ${unitPassed(u)?`<div class="result ok"><div class="big">Unit ${u.id} bestanden</div><p>Average ${unitAvg(u)}%. ${UNITS.find(x=>x.id===u.id+1&&x.full)?`<a href="#unit-${u.id+1}">Go to Unit ${u.id+1} →</a>`:"Tell Claude to build the next unit."}</p></div>`:""}`;
+}
+
+/* ================= STEP PAGE ================= */
+const TASKS={
+  bruecke:u=>[ u.bruecke.showSounds?"Read the sound guide and tap 🔊 on every row. Say each example after the audio.":null,
+    "Tap each word in “Words you already know” and repeat it out loud.",
+    "For each sound-shift rule: read the examples, then <b>type your guess</b> for each word under “Now you” and press Check. Work it out from the rule; don't look anything up.",
+    "Read the last box. Then press <b>Finish step</b>."].filter(Boolean),
+  woerter:u=>["Go through all the cards German-first. Say each word out loud <b>with its article</b> (der/die/das).","Go through them again English-first: say the German before you flip.","Take the check at the bottom: type the German for 8 words. Include der/die/das for nouns."],
+  lesen:u=>["Read the story one sentence at a time. Read each sentence out loud before you tap 🔊.","Tap a word with a dotted underline to see what it means. Tap <b>EN</b> only when a sentence stays unclear after two reads.","Then answer the 5 true/false questions <b>without scrolling back up</b>. Only your first answer counts."],
+  hoeren:u=>["Press <b>Listen only</b>, then play the dialog. Try to follow without the text.","Play it again with the text showing.","Tap 🔊 on each line, pause, and repeat it out loud.","Play the voicemail twice. Then answer the questions (only your first answer counts).","Do the dictation: play each sentence and type exactly what you hear. Then press <b>Finish step</b>."],
+  denken:u=>["For each step: read the English, then <b>say the German out loud</b> (or type it).","Press Reveal and compare. If you typed, it's checked for you. If you only said it, mark yourself honestly: ✓ or ✗.","Don't skip ahead: each step builds on the one before it. Press <b>Finish step</b> at the end."],
+  grammatik:u=>["Read the boxes in order.","Say every example sentence out loud.","Press <b>Mark as read</b>. This step isn't graded; the next step tests it."],
+  ueben:u=>["Answer every question in A, B and C.","Only your first try counts toward the grade.","Press <b>Finish step</b> when all are answered."],
+  tippen:u=>["Open the shortcut guide for your device and set it up.","Type each line exactly, including capitals, punctuation and ä/ö/ü/ß. Accuracy counts, not speed.","Your grade is your average accuracy across all lines."],
+  schreiben:u=>["Write the text in the box <b>without looking at anything</b>.","Press <b>Copy for Claude</b> and paste it into a new Claude chat. Claude corrects it and gives a score out of 10.","Enter Claude's score below and press Save grade.","Only then open the model answer and compare."],
+  sprechen:u=>["Press <b>Copy prompt</b> and paste it into a new Claude chat.","Switch to <b>voice mode</b> and have the conversation out loud. Don't type.","At the end Claude gives you a score out of 10. Enter it below and press Save grade."],
+};
+function viewStep(u,i){
+  const s=STEPS[i];
+  const prog=STEPS.map((x,j)=>`<i class="${j===i?"cur":stepStatus(u.id,x)}"></i>`).join("");
+  return `<a class="back" href="#unit-${u.id}">← Unit ${u.id}: ${esc(u.title)}</a>
+  <div class="stephead"><span>Step ${i+1} of ${STEPS.length} · about ${s.min} min</span><span>${s.pass!==null?`Pass mark ${s.pass}%`:"Not graded"}</span></div>
+  <div class="prog">${prog}</div>
+  <div class="hero" style="padding-top:12px"><h1>${s.t}</h1><p>${esc(s.en)}</p></div>
+  <div class="task"><div class="h">Your task</div><ol>${TASKS[s.k](u).map(t=>`<li>${t}</li>`).join("")}</ol>
+    <div class="passline">${s.pass!==null?`<b>Pass:</b> ${s.pass}% or better. Below that, redo this step before moving on.`:`<b>No grade.</b> Mark it read to continue.`}${grade(u.id,s.k)?` · Your best so far: <b>${grade(u.id,s.k).best}%</b>`:""}</div></div>
+  <div id="stepBody">${STEP_VIEW[s.k](u)}</div>
+  <div id="result"></div>`;
+}
+function showResult(u,i,pct){
+  const s=STEPS[i], box=$("#result");
+  if(s.pass===null){ state.read[gkey(u.id,s.k)]=true; save(); }
+  else recordGrade(u.id,s.k,pct);
+  const passed = s.pass===null || pct>=s.pass;
+  const key=gkey(u.id,s.k), oldStars=state.stars[key]||0, newStars=starsFor(pct,s.pass);
+  if(newStars>oldStars){ state.stars[key]=newStars; save(); }
+  addXP(10 + Math.max(0,newStars-oldStars)*20);
+  combo=0; hideCombo();
+  const nextI=i+1<STEPS.length?i+1:null;
+  const after = passed
+    ? (nextI!==null? `<a class="btn primary" href="#unit-${u.id}-${nextI+1}" style="display:inline-block;text-decoration:none;margin-top:10px">Next: Step ${nextI+1} · ${STEPS[nextI].t} →</a>`
+                   : `<a class="btn primary" href="#unit-${u.id}" style="display:inline-block;text-decoration:none;margin-top:10px">See unit result →</a>`)
+    : `<p><b>Below the ${s.pass}% pass mark.</b> Redo this step now, or tomorrow before you do anything else in this unit. Don't move on: the next steps build on this one.</p><button class="btn primary" id="redo" style="margin-top:10px">Redo this step</button>`;
+  box.innerHTML=`<div class="result ${passed?"ok":"no"}">${s.pass===null?`<div class="big">Read ✓</div>`:`<div class="stars">${starStr(newStars)}</div><div class="big">${pct}%</div><p>${passed?"Bestanden — passed.":"Nicht bestanden — not passed yet."} Best: ${grade(u.id,s.k).best}%. ${passed&&newStars<3?`<span class="small muted">${newStars===1?"90% for ★★, 100% for ★★★.":"100% for ★★★."}</span>`:""}</p>`}${after}</div>`;
+  const r=$("#redo"); if(r) r.onclick=()=>route(true);
+  box.scrollIntoView({behavior:"smooth",block:"center"});
+}
+function finishBtn(label){return `<div class="row"><button class="btn primary" id="finish" disabled>${label||"Finish step"}</button><span class="small muted" id="finishHint" style="align-self:center"></span></div>`;}
+
+/* ---------- step views ---------- */
+const STEP_VIEW={
+lesen(u){ const L=u.lesen, G=L.gloss;
+  const tok=t=>t.split(/([A-Za-zÄÖÜäöüß]+)/).map(w=>{ const g=G[w.toLowerCase()]; return g?`<button class="gw" data-w="${esc(w)}" data-g="${esc(g)}">${esc(w)}</button>`:esc(w); }).join("");
+  return `<div class="story card"><div class="sec-h" style="margin:0">${esc(L.genre)}</div><h2 class="st-t">${esc(L.title)}</h2><p class="muted" style="margin:2px 0 10px">${esc(L.en)} · ${L.sentences.length} sentences</p>
+    <div class="row" style="margin:0 0 8px"><button class="btn primary" id="stPlay">▶ Read aloud</button><button class="btn" id="stEn">English meaning</button></div>
+    <div id="stBody">${L.sentences.map((x,i)=>`<div class="sent" data-i="${i}"><div class="de">${tok(x.de)}</div><div class="sbtn"><button class="spk" data-say="${esc(x.de)}" data-v="F" aria-label="Anhören">🔊</button><button class="enb" data-i="${i}">EN</button></div><div class="en">${esc(x.en)}</div></div>`).join("")}</div>
+    <div class="gpop" id="gpop"></div>
+    <details class="keys" style="margin-top:12px"><summary>Relevant words (${Object.keys(G).length})</summary>${Object.entries(G).map(([k,v])=>`<div class="pair"><span class="de" style="flex:.8">${esc(k)}</span><span class="en" style="flex:1.2">${esc(v)}</span>${spk(k)}</div>`).join("")}</details>
+  </div>
+  <div class="card" id="tf"><div class="ex-h"><h3>Test your understanding</h3><span class="score" id="tfNum"></span></div><div id="tfBody"></div></div>
+  ${finishBtn()}`; },
+bruecke(u){ const B=u.bruecke;
+  return `<p class="lead">${esc(B.intro)}</p>
+  ${B.showSounds?`<div class="card"><h3 style="font-size:18px">How German sounds</h3><p class="small muted" style="margin:4px 0 8px">German spelling is regular: learn these and you can read any word aloud.</p>
+    <table class="snd">${SOUNDS.map(s=>`<tr><td>${esc(s.l)}</td><td>${esc(s.like)}</td><td>${esc(s.ex)}</td><td>${spk(s.ex)}</td></tr>`).join("")}</table></div>`:""}
+  <div class="card"><h3 style="font-size:18px">Words you already know</h3><p class="small muted" style="margin:4px 0 10px">Tap each one, listen, and repeat it.</p>
+    <div class="cog">${B.cognates.map(c=>`<button data-say="${esc(c.de)}" data-v="F"><b class="${gc(c.g)}">${esc(c.de)}</b><span>${esc(c.en)}</span></button>`).join("")}</div></div>
+  ${B.rules.map((r,ri)=>`<div class="card rule"><h3>${esc(r.title)}</h3><div class="how">${esc(r.how)}</div>
+    ${r.ex.map(p=>`<div class="pair"><span class="en">${esc(p[0])}</span><span class="ar">→</span><span class="de">${esc(p[1])}</span>${spk(p[1])}</div>`).join("")}
+    <div class="sub">Now you — type the German</div>
+    ${r.guess.map((p,gi)=>`<div class="q guess" data-a="${esc(p[1])}"><div class="p">${esc(p[0])} → ?</div><div class="inrow"><input class="tx" ${TX}><button class="btn">Check</button></div>${umlBar()}<div class="fb"></div></div>`).join("")}</div>`).join("")}
+  <div class="card"><h3 style="font-size:18px">${esc(B.extraTitle)}</h3>
+    ${B.extra.map(x=>`<div class="pair"><span class="de" style="flex:.8">${esc(x.de)}</span><span class="en" style="flex:1.4">${esc(x.en)}</span>${spk(x.de)}</div>`).join("")}</div>
+  ${finishBtn()}`; },
+woerter(u){
+  return `<div class="legend"><span><b class="g-m">der</b> masculine</span><span><b class="g-f">die</b> feminine</span><span><b class="g-n">das</b> neuter</span><span><b class="g-p">die</b> plural</span></div>
+  <div class="card fc-wrap">
+    <div class="fc" id="fc" role="button" tabindex="0"></div>
+    <div class="ctrl"><button class="btn" id="fcPrev" aria-label="Previous">←</button><button class="btn" id="fcFlip">Flip</button><button class="btn" id="fcSay">🔊</button><button class="btn" id="fcNext" aria-label="Next">→</button></div>
+    <div class="ctrl"><button class="btn ghost sm" id="fcDir">Switch to English first</button><button class="btn ghost sm" id="fcList">Full list</button></div>
+    <div class="vlist" id="vlist">${u.vocab.map(v=>`<div class="vrow"><span class="d ${gc(v.g)}">${esc(v.de)}</span><span class="e">${esc(v.en)}</span>${spk(v.de)}</div>`).join("")}</div>
+  </div>
+  <div class="card"><div class="ex-h"><h3>Check: 8 words</h3><span class="score" id="vcScore"></span></div>
+    <p class="small muted" style="margin:4px 0 0">Type the German. Nouns need der/die/das; a missing or wrong article counts as half.</p>
+    <div id="vc"></div></div>
+  ${finishBtn()}`; },
+hoeren(u){ const H=u.hoeren;
+  return `<div class="card" id="dlg"><h3 style="font-size:18px">Dialog: ${esc(u.dialog.title)}</h3><p class="small muted" style="margin:4px 0 8px">${esc(u.dialog.en)} W = Herr Weber, M = Herr Miller.</p>
+    <div class="row" style="margin:0 0 6px"><button class="btn primary" id="dlgPlay">▶ Play dialog</button><button class="btn" id="dlgHide">Listen only</button><button class="btn" id="dlgEn">English</button></div>
+    ${u.dialog.lines.map((l,i)=>`<div class="line" data-i="${i}"><div class="who ${l.s==="M"?"b":""}">${l.s}</div><div class="txt"><div>${esc(l.de)}</div><div class="en">${esc(l.en)}</div></div>${spk(l.de,l.s==="W"?"W":"M")}</div>`).join("")}
+  </div>
+  <div class="card"><div class="ex-h"><h3>Voicemail</h3><span class="score" id="hvScore"></span></div>
+    <p class="small muted" style="margin:4px 0 10px">${esc(H.intro)}</p>
+    <div class="player"><button class="big" id="hvPlay" aria-label="Play">▶</button><div class="meta"><b>Nachricht</b><br><span class="muted small" id="hvCount">Played 0×</span></div><button class="btn sm" id="hvTr">Transcript</button></div>
+    <div class="transcript" id="hvText">${esc(H.text)}</div>
+    <div id="hvQs">${H.qs.map((m,qi)=>`<div class="q" data-q="${qi}"><div class="p">${esc(m.q)}</div><div class="opts">${m.o.map((o,oi)=>`<button class="opt" data-o="${oi}">${esc(o)}</button>`).join("")}</div></div>`).join("")}</div></div>
+  <div class="card"><div class="ex-h"><h3>Diktat</h3><span class="score" id="dkScore"></span></div>
+    <p class="small muted" style="margin:4px 0 0">Type exactly what you hear, with capitals. Right words with a capital or umlaut slip count as half.</p>
+    <div id="dk">${H.diktat.map((d,di)=>`<div class="q" data-d="${di}"><div class="inrow"><button class="btn" data-play>▶</button><input class="tx" ${TX} aria-label="Diktat ${di+1}"><button class="btn" data-check>Check</button></div>${umlBar()}<div class="diff"></div></div>`).join("")}</div></div>
+  ${finishBtn()}`; },
+denken(u){
+  return `<div class="card" id="think">${u.denken.map((d,i)=>`<div class="step" data-i="${i}"><div class="num">${i+1} / ${u.denken.length}</div><div class="en">${esc(d.en)}</div>
+    <div class="inrow" style="margin-top:8px"><input class="tx" placeholder="Say it, or type it" ${TX}><button class="btn" data-reveal>Reveal</button></div>
+    <div class="fb"></div>
+    <div class="selfgrade"><span>Did you get it?</span><button class="btn sm" data-sg="1">✓ Yes</button><button class="btn sm" data-sg="0">✗ No</button></div>
+    <div class="ans"><div class="de">${esc(d.de)}${d.alt?`<small>Also right: ${d.alt.map(esc).join(" / ")}</small>`:""}${d.note?`<small>${esc(d.note)}</small>`:""}</div>${spk(d.de,"M")}</div></div>`).join("")}</div>
+  ${finishBtn()}`; },
+grammatik(u){
+  return `${u.grammar.map(g=>`<div class="card gram"><h3>${esc(g.h)}</h3>${g.html}</div>`).join("")}
+  <div class="row"><button class="btn primary" id="finish">Mark as read</button></div>`; },
+ueben(u){
+  return `<div class="card"><div class="ex-h"><h3>A · Multiple choice</h3><span class="score" id="mcScore"></span></div><div id="mc"></div></div>
+  <div class="card"><div class="ex-h"><h3>B · Fill the gap</h3><span class="score" id="gapScore"></span></div><p class="small muted" style="margin:4px 0 0">No umlaut keys? Type ae, oe, ue, ss — or use the buttons.</p><div id="gaps"></div></div>
+  <div class="card"><div class="ex-h"><h3>C · Build the sentence</h3><span class="score" id="bScore"></span></div><p class="small muted" style="margin:4px 0 0">Tap the words in order. Tap a placed word to remove it.</p><div id="builder"></div></div>
+  ${finishBtn()}`; },
+tippen(u){
+  return `<details class="keys"><summary>iPhone / Android</summary><p>Press and hold <kbd>a</kbd>, <kbd>o</kbd>, <kbd>u</kbd> or <kbd>s</kbd> and slide to ä, ö, ü or ß. Faster: add a German keyboard (iPhone: Settings → General → Keyboard → Keyboards) and switch with the 🌐 key.</p></details>
+  <details class="keys"><summary>Mac</summary><p><kbd>Option</kbd>+<kbd>u</kbd>, then the vowel → ä ö ü (Shift on the vowel for Ä Ö Ü). <kbd>Option</kbd>+<kbd>s</kbd> → ß.</p></details>
+  <details class="keys"><summary>Windows</summary><p>Add the keyboard layout <b>English (United States) – International</b>. Then <kbd>"</kbd> followed by a vowel → ä ö ü; <kbd>Right Alt</kbd>+<kbd>s</kbd> → ß.</p></details>
+  <details class="keys"><summary>German keyboard (QWERTZ)</summary><p>Z and Y are swapped. ä, ö, ü sit right of L and P; ß sits right of 0.</p></details>
+  <div class="card"><div class="ex-h"><h3>Line <span id="tpIdx"></span></h3><span class="score" id="tpAvg"></span></div>
+    <div class="target" id="tpTarget" style="margin-top:10px"></div>
+    <input class="typing" id="tpIn" ${TX} placeholder="Start typing…" aria-label="Type the line">
+    ${umlBar()}
+    <div class="stats"><span><b id="tpWpm">–</b> words/min</span><span><b id="tpAcc">–</b> accuracy</span></div>
+    <div class="row"><button class="btn" id="tpSay">🔊 Hear it</button><button class="btn" id="tpRestart">Restart line</button><button class="btn primary" id="tpNext" disabled>Next line →</button></div>
+  </div>
+  ${finishBtn()}`; },
+schreiben(u){
+  return `<div class="card"><p style="margin-top:0"><b>${esc(u.write.task)}</b></p>
+    <ul class="clean">${u.write.points.map(p=>`<li>${esc(p)}</li>`).join("")}</ul>
+    <textarea id="wText" placeholder="Schreiben Sie hier…" spellcheck="false"></textarea>${umlBar()}
+    <div class="row"><button class="btn primary" id="wCopy">Copy for Claude</button></div>
+    <div class="copybox" id="wBox"></div></div>
+  <div class="card"><b>Claude's score</b><div class="row" style="align-items:center"><input class="score" id="sc" type="number" min="0" max="10" inputmode="numeric" placeholder="0–10"><span class="muted">/ 10</span><button class="btn primary" id="finish">Save grade</button></div></div>
+  <div class="card"><button class="btn" id="wModel">Show model answer</button><div class="model" id="wModelTxt">${esc(u.write.model)}</div></div>`; },
+sprechen(u){
+  return `<div class="card"><p style="margin-top:0">${esc(u.speak.goethe)}</p>
+    <div class="slots">${u.speak.prompts.map(p=>`<span>${esc(p)}</span>`).join("")}</div>
+    <div class="row"><button class="btn primary" id="sCopy">Copy prompt</button></div><div class="copybox" id="sBox"></div></div>
+  <div class="card"><b>Claude's score</b><div class="row" style="align-items:center"><input class="score" id="sc" type="number" min="0" max="10" inputmode="numeric" placeholder="0–10"><span class="muted">/ 10</span><button class="btn primary" id="finish">Save grade</button></div></div>`; },
+};
+
+/* ---------- step wiring ---------- */
+function enableFinish(ready, hint){ const f=$("#finish"); if(!f) return; f.disabled=!ready; const h=$("#finishHint"); if(h) h.textContent=ready?"":hint; }
+function wireTyped(q, check){ const inp=$("input",q); wireUml(q,inp); $(".inrow .btn",q).onclick=check; inp.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();check();}}; }
+const STEP_WIRE={
+lesen(u,i){ const L=u.lesen; const sents=$$("#stBody .sent"), pop=$("#gpop");
+  $$(".gw").forEach(b=>b.onclick=e=>{ e.stopPropagation(); const r=b.getBoundingClientRect(), sr=$(".story").getBoundingClientRect();
+    pop.innerHTML=`<b>${esc(b.dataset.w)}</b> = ${esc(b.dataset.g)}`; pop.style.left=Math.max(8,Math.min(r.left-sr.left, sr.width-230))+"px"; pop.style.top=(r.bottom-sr.top+6)+"px"; pop.classList.add("on"); play(b.dataset.w,"F"); });
+  document.addEventListener("click",()=>pop.classList.remove("on"),{once:false});
+  $$(".enb").forEach(b=>b.onclick=()=>{ sents[+b.dataset.i].classList.toggle("showen"); });
+  $("#stEn").onclick=e=>{ const on=!$("#stBody").classList.contains("allen"); $("#stBody").classList.toggle("allen",on); e.target.textContent=on?"Hide English":"English meaning"; };
+  $("#stPlay").onclick=e=>{ const b=e.target; if(b.dataset.on){ stopAudio(); return; } b.dataset.on=1; b.textContent="■ Stop";
+    playSeq(L.sentences.map((x,k)=>({t:x.de,v:"F",i:k,gap:700})),k=>{ sents.forEach(x=>x.classList.toggle("now",+x.dataset.i===k)); if(k===-1){ delete b.dataset.on; b.textContent="▶ Read aloud"; } }); };
+  // true/false, one at a time
+  let qi=0; const res=[];
+  const drawQ=()=>{ $("#tfNum").textContent=qi<L.qs.length?`${qi+1} of ${L.qs.length}`:`${res.filter(Boolean).length} / ${L.qs.length}`;
+    if(qi>=L.qs.length){ $("#tfBody").innerHTML=`<p style="margin:8px 0 0">${res.filter(Boolean).length} of ${L.qs.length} right. Press <b>Finish step</b>.</p>`; enableFinish(true,""); return; }
+    const q=L.qs[qi]; $("#tfBody").innerHTML=`<p class="tfq">${esc(q.q)}</p><div class="opts"><button class="opt" data-a="1">Wahr · True</button><button class="opt" data-a="0">Falsch · False</button></div><div class="why"></div>`;
+    $$("#tfBody .opt").forEach(b=>b.onclick=()=>{ if(res.length>qi) return; const ok=(b.dataset.a==="1")===q.a; res.push(ok); answered(ok);
+      b.classList.add(ok?"right":"wrong"); if(!ok) $$("#tfBody .opt").find(x=>(x.dataset.a==="1")===q.a).classList.add("right");
+      const w=$("#tfBody .why"); w.classList.add("on"); w.innerHTML=`${ok?"Richtig!":"Nicht ganz."} ${esc(q.why)} <button class="btn sm" id="tfNext" style="margin-left:6px">${qi+1<L.qs.length?"Next →":"Done"}</button>`;
+      $("#tfNext").onclick=()=>{ qi++; drawQ(); }; }); };
+  enableFinish(false,"Answer the 5 questions first"); drawQ();
+  $("#finish").onclick=()=>showResult(u,i,Math.round(100*res.filter(Boolean).length/L.qs.length));
+},
+bruecke(u,i){
+  const qs=$$(".guess"), res={};
+  const upd=()=>enableFinish(Object.keys(res).length===qs.length, `${qs.length-Object.keys(res).length} guesses left`);
+  qs.forEach((q,k)=>{ const ans=q.dataset.a, inp=$("input",q), fb=$(".fb",q);
+    wireTyped(q,()=>{ if(!inp.value.trim()||q.dataset.done) return;
+      const ok=normS(stripArt(inp.value))===normS(stripArt(ans));
+      res[k]=ok; answered(ok); q.dataset.done=1; inp.disabled=true; inp.classList.add(ok?"right":"wrong");
+      fb.className="fb "+(ok?"ok":"no"); fb.innerHTML=(ok?"Richtig! ":"Answer: ")+`<b>${esc(ans)}</b>`; play(ans,"F"); upd(); });
+  });
+  upd();
+  $("#finish").onclick=()=>showResult(u,i,Math.round(100*Object.values(res).filter(Boolean).length/qs.length));
+},
+woerter(u,i){
+  let idx=0, flipped=false, enFirst=false; const seen=new Set(), fc=$("#fc");
+  function draw(autoplay){ const v=u.vocab[idx]; seen.add(idx);
+    const de=`<div class="w ${gc(v.g)}">${esc(v.de)}</div>`, en=`<div class="w" style="font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:22px">${esc(v.en)}</div>`;
+    const bDe=`<div class="tr ${gc(v.g)}" style="font-family:'Fraunces',Georgia,serif;font-size:22px">${esc(v.de)}</div>`, bEn=`<div class="tr">${esc(v.en)}</div>`, note=v.note?`<div class="note">${esc(v.note)}</div>`:"";
+    fc.innerHTML=(enFirst?en:de)+(flipped?(enFirst?bDe:bEn)+note:`<div class="tr"></div>`)+`<div class="hint">${idx+1} / ${u.vocab.length} · tap to flip</div>`;
+    if(autoplay&&(!enFirst||flipped)) play(v.de,"F");
+    if(seen.size===u.vocab.length) srsAdd(u);
+  }
+  const flip=()=>{flipped=!flipped; draw(true);};
+  fc.onclick=flip; $("#fcFlip").onclick=flip;
+  $("#fcNext").onclick=()=>{idx=(idx+1)%u.vocab.length; flipped=false; draw(true);};
+  $("#fcPrev").onclick=()=>{idx=(idx-1+u.vocab.length)%u.vocab.length; flipped=false; draw(true);};
+  $("#fcSay").onclick=()=>play(u.vocab[idx].de,"F");
+  $("#fcDir").onclick=e=>{enFirst=!enFirst; flipped=false; e.target.textContent=enFirst?"Switch to German first":"Switch to English first"; draw(true);};
+  $("#fcList").onclick=e=>{const l=$("#vlist"); l.classList.toggle("on"); e.target.textContent=l.classList.contains("on")?"Hide list":"Full list";};
+  draw(false);
+  // check
+  const pick=shuffle(u.vocab.map((v,k)=>k)).slice(0,8), res={};
+  $("#vc").innerHTML=pick.map(k=>`<div class="q" data-k="${k}"><div class="p">${esc(u.vocab[k].en)}</div><div class="inrow"><input class="tx" ${TX}><button class="btn">Check</button></div>${umlBar()}<div class="fb"></div></div>`).join("");
+  const upd=()=>{ const n=Object.keys(res).length, sc=Object.values(res).reduce((a,b)=>a+b,0); $("#vcScore").textContent=`${sc} / ${n}`; enableFinish(n===pick.length, `${pick.length-n} words left in the check`); };
+  $$("#vc .q").forEach(q=>{ const v=u.vocab[+q.dataset.k], inp=$("input",q), fb=$(".fb",q);
+    const forms=v.de.split(/\s*\/\s*/); if(v.g==="v" && /\s(bei|in|aus)$/.test(v.de)) forms.push(v.de.split(" ")[0]);
+    wireTyped(q,()=>{ if(!inp.value.trim()||q.dataset.done) return; const y=normS(inp.value);
+      let pts=0; if(forms.some(f=>normS(f)===y)) pts=1; else if(/^[mfnp]$/.test(v.g) && forms.some(f=>normS(stripArt(f))===normS(stripArt(inp.value)))) pts=.5;
+      res[q.dataset.k]=pts; answered(pts===1); q.dataset.done=1; inp.disabled=true; inp.classList.add(pts===1?"right":"wrong");
+      fb.className="fb "+(pts===1?"ok":"no"); fb.innerHTML=(pts===1?"Richtig! ":pts? "Article! Correct: ":"Answer: ")+`<b class="${gc(v.g)}">${esc(v.de)}</b>`; play(v.de,"F"); upd(); });
+  });
+  upd();
+  $("#finish").onclick=()=>{ const sc=Object.values(res).reduce((a,b)=>a+b,0); showResult(u,i,Math.round(100*sc/pick.length)); };
+},
+hoeren(u,i){
+  const H=u.hoeren, lines=$$("#dlg .line");
+  $("#dlgPlay").onclick=e=>{ const b=e.target; if(b.dataset.on){stopAudio();return;} b.dataset.on=1; b.textContent="■ Stop";
+    playSeq(u.dialog.lines.map((l,k)=>({t:l.de,v:l.s==="W"?"W":"M",i:k,gap:900})),k=>{ lines.forEach(x=>x.classList.toggle("now",+x.dataset.i===k)); if(k===-1){delete b.dataset.on; b.textContent="▶ Play dialog";} }); };
+  $("#dlgHide").onclick=e=>{const d=$("#dlg"); d.classList.toggle("hide-de"); e.target.textContent=d.classList.contains("hide-de")?"Show text":"Listen only";};
+  $("#dlgEn").onclick=e=>{const d=$("#dlg"); d.classList.toggle("show-en"); e.target.textContent=d.classList.contains("show-en")?"Hide English":"English";};
+  let plays=0; $("#hvPlay").onclick=()=>{plays++; $("#hvCount").textContent=`Played ${plays}×`; play(H.text,H.voice,$("#hvPlay"));};
+  $("#hvTr").onclick=e=>{const t=$("#hvText"); t.classList.toggle("on"); e.target.textContent=t.classList.contains("on")?"Hide":"Transcript";};
+  const hv={}, dk={};
+  const upd=()=>{ const c=o=>Object.values(o).reduce((a,b)=>a+b,0);
+    $("#hvScore").textContent=`${c(hv)} / ${H.qs.length}`; $("#dkScore").textContent=`${c(dk)} / ${H.diktat.length}`;
+    const left=(H.qs.length-Object.keys(hv).length)+(H.diktat.length-Object.keys(dk).length);
+    enableFinish(left===0, `${left} items left`); };
+  $$("#hvQs .q").forEach(q=>{ const qi=+q.dataset.q, m=H.qs[qi];
+    $$(".opt",q).forEach(b=>b.onclick=()=>{ if(q.dataset.solved) return; const oi=+b.dataset.o; if(!(qi in hv)){ hv[qi]=oi===m.a?1:0; answered(oi===m.a); }
+      if(oi===m.a){b.classList.add("right"); q.dataset.solved=1;} else b.classList.add("wrong"); upd(); }); });
+  $$("#dk .q").forEach(q=>{ const di=+q.dataset.d, target=H.diktat[di], inp=$("input",q), out=$(".diff",q);
+    wireUml(q,inp); $("[data-play]",q).onclick=e=>play(target,"F",e.target);
+    const check=()=>{ if(!inp.value.trim()) return; const r=wordDiff(target,inp.value.trim());
+      if(!(di in dk)){ dk[di]=r.perfect?1:r.close?.5:0; answered(r.perfect); }
+      out.innerHTML=r.html+`<div class="fb ${r.perfect?"ok":"no"}">${r.perfect?"Perfekt!":r.close?"Right words — check capitals / umlauts (half credit).":"Not quite. Red = wrong or extra, underlined = missing."} ${di in dk && !r.perfect?"First try is what counts; fix it anyway for practice.":""}</div>`;
+      inp.classList.toggle("right",r.perfect); inp.classList.toggle("wrong",!r.perfect); upd(); };
+    $("[data-check]",q).onclick=check; inp.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();check();}}; });
+  upd();
+  $("#finish").onclick=()=>{ const c=o=>Object.values(o).reduce((a,b)=>a+b,0); showResult(u,i,Math.round(100*(c(hv)+c(dk))/(H.qs.length+H.diktat.length))); };
+},
+denken(u,i){
+  const res={}, n=u.denken.length;
+  const upd=()=>enableFinish(Object.keys(res).length===n, `${n-Object.keys(res).length} left`);
+  $$("#think .step").forEach(st=>{ const k=+st.dataset.i, d=u.denken[k], inp=$("input",st), fb=$(".fb",st), sg=$(".selfgrade",st);
+    const reveal=()=>{ if(st.dataset.rev) return; st.dataset.rev=1; const typed=inp.value.trim(); inp.disabled=true;
+      if(typed){ const ok=[d.de,...(d.alt||[])].some(a=>normS(a)===normS(typed)); res[k]=ok?1:0; answered(ok); fb.className="fb "+(ok?"ok":"no"); fb.textContent=ok?"Richtig!":"Not quite — compare below."; upd(); }
+      else sg.classList.add("on");
+      $(".ans",st).classList.add("on"); play(d.de,"M"); };
+    $("[data-reveal]",st).onclick=reveal; inp.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();reveal();}};
+    $$("[data-sg]",st).forEach(b=>b.onclick=()=>{ res[k]=+b.dataset.sg; answered(res[k]===1); sg.innerHTML=`<span class="${res[k]?"ok-t":"no-t"}">${res[k]?"✓ Got it":"✗ Missed"}</span>`; upd(); });
+  });
+  upd();
+  $("#finish").onclick=()=>showResult(u,i,Math.round(100*Object.values(res).reduce((a,b)=>a+b,0)/n));
+},
+grammatik(u,i){ $("#finish").onclick=()=>showResult(u,i,null); },
+ueben(u,i){
+  const res={mc:{},gap:{},b:{}}, tot=u.mc.length+u.gaps.length+u.builder.length;
+  const c=o=>Object.values(o).filter(Boolean).length;
+  const upd=()=>{ $("#mcScore").textContent=`${c(res.mc)} / ${u.mc.length}`; $("#gapScore").textContent=`${c(res.gap)} / ${u.gaps.length}`; $("#bScore").textContent=`${c(res.b)} / ${u.builder.length}`;
+    const n=Object.keys(res.mc).length+Object.keys(res.gap).length+Object.keys(res.b).length; enableFinish(n===tot, `${tot-n} questions left`); };
+  $("#mc").innerHTML=u.mc.map((m,qi)=>`<div class="q" data-q="${qi}"><div class="p">${esc(m.q)}</div><div class="opts">${m.o.map((o,oi)=>`<button class="opt" data-o="${oi}">${esc(o)}</button>`).join("")}</div><div class="why">${esc(m.why)}</div></div>`).join("");
+  $$("#mc .q").forEach(q=>{ const qi=+q.dataset.q, m=u.mc[qi];
+    $$(".opt",q).forEach(b=>b.onclick=()=>{ if(q.dataset.solved) return; const oi=+b.dataset.o; if(!(qi in res.mc)){ res.mc[qi]=oi===m.a; answered(oi===m.a); }
+      $(".why",q).classList.add("on"); if(oi===m.a){b.classList.add("right"); q.dataset.solved=1;} else b.classList.add("wrong"); upd(); }); });
+  $("#gaps").innerHTML=u.gaps.map((g,gi)=>`<div class="q" data-g="${gi}"><div class="p">${esc(g.q)}</div><div class="inrow"><input class="tx" ${TX}><button class="btn">Check</button></div>${umlBar()}<div class="fb"></div></div>`).join("");
+  $$("#gaps .q").forEach(q=>{ const gi=+q.dataset.g, g=u.gaps[gi], inp=$("input",q), fb=$(".fb",q);
+    wireTyped(q,()=>{ if(!inp.value.trim()) return; const ok=g.a.some(a=>normS(a)===normS(inp.value)); if(!(gi in res.gap)){ res.gap[gi]=ok; answered(ok); }
+      inp.classList.toggle("right",ok); inp.classList.toggle("wrong",!ok);
+      if(ok){ fb.className="fb ok"; fb.textContent=g.a.some(a=>a===inp.value.trim())?"Richtig!":`Richtig — exact spelling: ${g.a[0]}`; }
+      else { fb.className="fb no"; fb.innerHTML=`Not quite. <button class="btn ghost sm">Show answer</button>`; $("button",fb).onclick=()=>{fb.textContent=`Answer: ${g.a[0]}`;}; }
+      upd(); }); });
+  $("#builder").innerHTML=u.builder.map((b,bi)=>`<div class="q" data-b="${bi}"><div class="p small muted">${esc(b.en)}</div><div class="answer"></div><div class="tray"></div><div class="row" style="margin-top:4px"><button class="btn" data-act="check">Check</button><button class="btn ghost" data-act="reset">Reset</button></div><div class="fb"></div></div>`).join("");
+  $$("#builder .q").forEach(q=>{ const bi=+q.dataset.b, b=u.builder[bi], ans=$(".answer",q), tray=$(".tray",q), fb=$(".fb",q);
+    let order=shuffle(b.w.map((w,k)=>k)); if(order.every((v,k)=>v===k)&&order.length>1) order.reverse(); let picked=[];
+    const draw=()=>{ tray.innerHTML=order.map(k=>`<button class="tok ${picked.includes(k)?"used":""}" data-k="${k}">${esc(b.w[k])}</button>`).join("");
+      ans.innerHTML=picked.map((k,pi)=>`<button class="tok" data-p="${pi}">${esc(b.w[k])}</button>`).join("");
+      $$(".tok",tray).forEach(t=>t.onclick=()=>{const k=+t.dataset.k; if(!picked.includes(k)){picked.push(k); ans.className="answer"; fb.textContent=""; draw();}});
+      $$(".tok",ans).forEach(t=>t.onclick=()=>{picked.splice(+t.dataset.p,1); ans.className="answer"; fb.textContent=""; draw();}); };
+    $('[data-act="check"]',q).onclick=()=>{ if(picked.length<b.w.length){fb.className="fb no"; fb.textContent="Use all the words."; return;}
+      const sent=picked.map(k=>b.w[k]).join(" "), ok=b.a.some(a=>normS(a)===normS(sent)); if(!(bi in res.b)){ res.b[bi]=ok; answered(ok); }
+      ans.className="answer "+(ok?"right":"wrong");
+      if(ok){ fb.className="fb ok"; const o=b.a.filter(a=>normS(a)!==normS(sent)); fb.textContent=o.length?`Richtig! Also possible: ${o.join(" / ")}`:"Richtig!"; play(b.a.find(a=>normS(a)===normS(sent)),"M"); }
+      else { fb.className="fb no"; fb.textContent=`Not quite — check where the verb is. Answer: ${b.a[0]}`; }
+      upd(); };
+    $('[data-act="reset"]',q).onclick=()=>{picked=[]; ans.className="answer"; fb.textContent=""; draw();}; draw(); });
+  upd();
+  $("#finish").onclick=()=>showResult(u,i,Math.round(100*(c(res.mc)+c(res.gap)+c(res.b))/tot));
+},
+tippen(u,i){
+  let li=0,t0=null,errors=0,prevLen=0,finished=false; const acc={}; const tIn=$("#tpIn"), tT=$("#tpTarget");
+  wireUml($("#stepBody .card"),tIn);
+  const upd=()=>{ const v=Object.values(acc); $("#tpAvg").textContent=v.length?`Average ${Math.round(v.reduce((a,b)=>a+b,0)/v.length)}%`:""; enableFinish(v.length===u.tippen.length, `${u.tippen.length-v.length} lines left`); };
+  const render=()=>{ const line=u.tippen[li], v=tIn.value;
+    tT.innerHTML=[...line].map((ch,k)=>{let c="c-todo"; if(k<v.length) c=v[k]===ch?"c-ok":"c-bad"; else if(k===v.length) c="c-cur c-todo"; return `<span class="${c}">${ch===" "?"&nbsp;":esc(ch)}</span>`;}).join(""); };
+  const load=()=>{ t0=null; errors=0; prevLen=0; finished=false; tIn.value=""; $("#tpIdx").textContent=`${li+1} of ${u.tippen.length}`; $("#tpWpm").textContent="–"; $("#tpAcc").textContent="–"; $("#tpNext").disabled=true; render(); };
+  tIn.addEventListener("input",()=>{ if(finished) return; const line=u.tippen[li], v=tIn.value; if(!t0&&v.length) t0=performance.now();
+    if(v.length>prevLen) for(let k=prevLen;k<v.length;k++) if(v[k]!==line[k]) errors++;
+    prevLen=v.length; render();
+    if(v===line){ finished=true; const mins=(performance.now()-t0)/60000, wpm=Math.round((line.length/5)/Math.max(mins,1/600)), a=Math.max(0,Math.round(100*(1-errors/line.length)));
+      $("#tpWpm").textContent=wpm; $("#tpAcc").textContent=a+"%"; if(!(li in acc)) answered(a>=90); acc[li]=Math.max(acc[li]||0,a);
+      const b=state.typing["u"+u.id]; if(!b||wpm>b.wpm){ state.typing["u"+u.id]={wpm}; save(); }
+      $("#tpNext").disabled=li===u.tippen.length-1; upd(); toast(a>=90?"Sauber!":"Under 90% — press Restart line to improve it"); } });
+  $("#tpNext").onclick=()=>{ li=Math.min(li+1,u.tippen.length-1); load(); tIn.focus(); };
+  $("#tpRestart").onclick=()=>{ load(); tIn.focus(); };
+  $("#tpSay").onclick=e=>play(u.tippen[li],"F",e.target);
+  load(); upd();
+  $("#finish").onclick=()=>{ const v=Object.values(acc); showResult(u,i,Math.round(v.reduce((a,b)=>a+b,0)/v.length)); };
+},
+schreiben(u,i){
+  const wt=$("#wText"), dk=`dfb-draft-${u.id}`; wt.value=lsGet(dk)||""; wt.addEventListener("input",()=>lsSet(dk,wt.value)); wireUml($("#stepBody .card"),wt);
+  $("#wCopy").onclick=()=>{ if(!wt.value.trim()){toast("Write your text first"); return;}
+    copyText(`Deutsch-Kurs, Unit ${u.id} (${u.level}), Schreiben. Aufgabe: ${u.write.task} ${u.write.points.join("; ")}.\n\nMein Text:\n${wt.value.trim()}\n\nBitte korrigiere meinen Text wie ein Goethe-Prüfer:\n1) Habe ich alle drei Punkte erfüllt?\n2) Liste jeden Fehler mit Korrektur und kurzer Erklärung auf Englisch.\n3) Gib mir die korrigierte Version.\n4) Gib mir eine Punktzahl von 0 bis 10 (Aufgabe erfüllt: 0–4, Wortschatz und Grammatik: 0–4, Verständlichkeit: 0–2). Schreib die Punktzahl am Ende in einer eigenen Zeile: „Punkte: X/10“.`,$("#wBox")); };
+  $("#wModel").onclick=e=>{const m=$("#wModelTxt"); m.classList.toggle("on"); e.target.textContent=m.classList.contains("on")?"Hide model answer":"Show model answer";};
+  wireScore(u,i);
+},
+sprechen(u,i){
+  $("#sCopy").onclick=()=>copyText(u.speak.chat+" Am Ende des Gesprächs: Gib mir eine Punktzahl von 0 bis 10 (Aufgabe erfüllt: 0–4, Grammatik und Wortschatz: 0–3, Aussprache und Flüssigkeit: 0–3), die drei wichtigsten Fehler, und schreib am Ende in einer eigenen Zeile: „Punkte: X/10“.",$("#sBox"));
+  wireScore(u,i);
+},
+};
+function wireScore(u,i){ $("#finish").onclick=()=>{ const v=parseFloat($("#sc").value); if(isNaN(v)||v<0||v>10){toast("Enter Claude's score, 0 to 10"); return;} showResult(u,i,Math.round(v*10)); }; }
+
+/* ================= REVIEW (SRS) ================= */
+const INTERVAL=[0,1,2,4,8,16];
+function srsAdd(u){ const now=Date.now(); let added=0; u.vocab.forEach((v,k)=>{const id=`u${u.id}-v${k}`; if(!state.srs[id]){state.srs[id]={box:0,due:now}; added++;}}); if(added){save(); toast(`${added} words added to your daily review`);} }
+function viewReview(){
+  const cards=srsCards(), counts=[0,0,0,0,0,0]; cards.forEach(c=>counts[Math.min(c.s.box,5)]++);
+  return `<div class="hero"><h1>Review</h1><p>Do this first, every day. Say the German out loud, then check. Words you know come back after 1, 2, 4, 8, then 16 days; words you miss come back tomorrow.</p></div>
+  ${cards.length?`<div class="boxes">${["New","1 d","2 d","4 d","8 d","16 d"].map((l,k)=>`<div><b>${counts[k]}</b>${l}</div>`).join("")}</div><div class="card fc-wrap" id="rv"></div>`
+  :`<div class="card">No cards yet. Words join your review when you go through all the flashcards in a unit's <b>Wörter</b> step. <a href="#heute">Back to your next task →</a></div>`}`;
+}
+function wireReview(){
+  const box=$("#rv"); if(!box) return; let queue=shuffle(srsDue()), shown=false, n=0;
+  const draw=()=>{
+    if(!queue.length){ box.innerHTML=`<div class="fc"><div class="w">Fertig für heute!</div><div class="tr">${n?n+" cards reviewed.":"Nothing due right now."}</div></div><a class="btn primary" href="#heute" style="text-decoration:none">Now: your next task →</a>`; return; }
+    const c=queue[0];
+    box.innerHTML=`<div class="fc" id="rvc"><div class="w" style="font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:22px">${esc(c.v.en)}</div>
+      ${shown?`<div class="tr ${gc(c.v.g)}" style="font-family:'Fraunces',Georgia,serif;font-size:24px">${esc(c.v.de)}</div>${c.v.note?`<div class="note">${esc(c.v.note)}</div>`:""}`:`<div class="tr">Say it out loud (with der/die/das)</div>`}
+      <div class="hint">${queue.length} left</div></div>
+      <div class="ctrl">${shown?`<button class="btn" id="rvAgain">✗ Missed it</button><button class="btn" id="rvSay">🔊</button><button class="btn primary" id="rvGood">✓ Knew it</button>`:`<button class="btn primary" id="rvShow">Show answer</button>`}</div>`;
+    if(shown){ play(c.v.de,"F"); $("#rvAgain").onclick=()=>gradeCard(false); $("#rvGood").onclick=()=>gradeCard(true); $("#rvSay").onclick=()=>play(c.v.de,"F"); }
+    else { $("#rvShow").onclick=()=>{shown=true; draw();}; $("#rvc").onclick=()=>{shown=true; draw();}; } };
+  const gradeCard=ok=>{ const c=queue.shift(), s=state.srs[c.id];
+    if(ok){ addXP(5); s.box=Math.min((s.box||0)+1,5); s.due=Date.now()+INTERVAL[s.box]*864e5-36e5; n++; } else { s.box=1; s.due=Date.now()+864e5-36e5; queue.push(c); }
+    save(); shown=false; draw(); };
+  draw();
+}
+
+/* ================= GRADES (NOTEN) ================= */
+function viewGrades(){
+  const fullU=UNITS.filter(u=>u.full);
+  return `${hudHTML()}<div class="hero"><h1>Noten</h1><p>Your best score on every step. A step is passed at its pass mark; a unit is passed when all its steps are.</p></div>
+  ${fullU.map(u=>{ const avg=unitAvg(u), passed=unitPassed(u), t=state.typing["u"+u.id];
+    return `<div class="card"><div class="ex-h"><h3>Unit ${u.id} · ${esc(u.title)}</h3><span class="${passed?"ok-t":"muted"} small">${passed?"Bestanden":`${STEPS.filter(s=>stepStatus(u.id,s)==="pass").length}/${STEPS.length} passed`}</span></div>
+    <table class="grades"><tr><th>Step</th><th class="r">Best</th><th class="r">Stars</th><th class="r">Pass</th><th class="r">Tries</th></tr>
+    ${STEPS.map((s,i)=>{ const g=grade(u.id,s.k), st=stepStatus(u.id,s);
+      return `<tr><td><a href="#unit-${u.id}-${i+1}">${i+1}. ${s.t}</a></td><td class="r ${st==="pass"?"ok-t":st==="fail"?"no-t":"muted"}">${s.pass===null?(st==="pass"?"read":"–"):g?g.best+"%":"–"}</td><td class="r stars sm">${s.pass===null?"":starStr(state.stars[gkey(u.id,s.k)]||0)}</td><td class="r muted">${s.pass===null?"—":s.pass+"%"}</td><td class="r muted">${g?g.attempts:"–"}</td></tr>`; }).join("")}
+    <tr><td><b>Unit average</b></td><td class="r"><b>${avg!=null?avg+"%":"–"}</b></td><td></td><td></td><td></td></tr></table>
+    ${t?`<p class="small muted" style="margin:8px 0 0">Best typing speed: ${t.wpm} words/min</p>`:""}</div>`; }).join("")}
+  <div class="card small muted">Grades are saved in this browser. Use the same device and browser to keep them.</div>`;
+}
+
+/* ================= GAMES (SPIELE) ================= */
+function gamePool(){ // nouns from units whose vocabulary you've started; Unit 1 if none yet
+  const started=UNITS.filter(u=>u.full&&u.vocab.some((v,k)=>state.srs[`u${u.id}-v${k}`]));
+  const units=started.length?started:UNITS.filter(u=>u.id===1);
+  const out=[], seen=new Set();
+  units.forEach(u=>{ [...u.vocab, ...u.bruecke.cognates].forEach(v=>{ if(!/^[mfn]$/.test(v.g)) return; const de=v.de.split(" / ")[0], m=de.match(/^(der|die|das)\s+(.+)$/); if(!m||seen.has(m[2])) return; seen.add(m[2]); out.push({art:m[1],noun:m[2],en:v.en.split(" (")[0],g:v.g,full:de}); }); });
+  return {nouns:out, units:units.map(u=>u.id), pairs:units.flatMap(u=>u.vocab.filter(v=>v.g!=="x"||v.de.length<22).map(v=>({de:v.de.split(" / ")[0],en:v.en.split(",")[0].split(" (")[0],g:v.g})))};
+}
+function viewGames(){ const P=gamePool(), hs=state.hs;
+  return `${hudHTML()}<div class="hero" style="padding-top:12px"><h1>Spiele</h1><p>Quick games with the words from ${P.units.length>1?"Units "+P.units.join(", "):"Unit "+P.units[0]}. They earn XP toward your daily goal.</p></div>
+  <div class="gamecard"><div><h3>Der · Die · Das Blitz</h3><p>60 seconds, 3 lives. Tap the right article. Correct answers in a row multiply your points.</p><span class="small muted">Best: ${hs.blitz||0}</span></div><a class="btn primary" href="#spiel-blitz">Play</a></div>
+  <div class="gamecard"><div><h3>Paare</h3><p>Match 6 German words to their English meanings as fast as you can. Wrong pairs cost 3 seconds.</p><span class="small muted">Best: ${hs.paare?hs.paare+" pts":"–"}</span></div><a class="btn primary" href="#spiel-paare">Play</a></div>`; }
+function viewBlitz(){ return `<a class="back" href="#spiele">← Spiele</a><div class="game" id="blitz">
+  <div class="gtop"><span id="bzTime">60</span><span id="bzLives">❤️❤️❤️</span><span id="bzScore">0</span></div>
+  <div class="bzcard" id="bzCard"><div class="bzw" id="bzWord">Bereit?</div><div class="bzen" id="bzEn">Tap Start</div></div>
+  <div class="arts"><button class="art g-m" data-a="der" disabled>der</button><button class="art g-f" data-a="die" disabled>die</button><button class="art g-n" data-a="das" disabled>das</button></div>
+  <div class="row" style="justify-content:center"><button class="btn primary" id="bzStart">Start</button></div><div id="bzEnd"></div></div>`; }
+function wireBlitz(){ const P=gamePool().nouns; let t=60,lives=3,score=0,streakN=0,cur=null,timer=null,deck=[],busy=false;
+  const draw=()=>{ $("#bzTime").textContent=`⏱ ${t}s`; $("#bzLives").textContent="❤️".repeat(lives)+"🤍".repeat(3-lives); $("#bzScore").textContent=`${score} pts`+(streakN>=3?` · ×${Math.min(4,1+Math.floor(streakN/3))}`:""); };
+  const next=()=>{ if(!deck.length) deck=shuffle(P); cur=deck.pop(); $("#bzWord").textContent=cur.noun; $("#bzEn").textContent=cur.en; $("#bzCard").className="bzcard"; busy=false; };
+  const end=()=>{ clearInterval(timer); $$(".art").forEach(b=>b.disabled=true); const best=state.hs.blitz||0; if(score>best){ state.hs.blitz=score; save(); }
+    const xp=Math.round(score/10); if(xp) addXP(xp);
+    $("#bzEnd").innerHTML=`<div class="result ${score>best?"ok":""}" style="border-color:var(--line)"><div class="big">${score} pts</div><p>${score>best?"New best! 🎉":"Best: "+best} · +${xp} XP</p><button class="btn primary" id="bzAgain" style="margin-top:8px">Play again</button></div>`;
+    $("#bzAgain").onclick=()=>route(); };
+  $$(".art").forEach(b=>b.onclick=()=>{ if(busy||!cur) return; busy=true; const ok=b.dataset.a===cur.art;
+    if(ok){ streakN++; score+=10*Math.min(4,1+Math.floor(streakN/3)); $("#bzCard").className="bzcard ok"; play(cur.art+" "+cur.noun,"F"); setTimeout(next,450); }
+    else { streakN=0; lives--; $("#bzCard").className="bzcard no"; $("#bzWord").innerHTML=`<span class="${gc(cur.g)}">${cur.art}</span> ${esc(cur.noun)}`; setTimeout(()=>{ if(lives<=0) end(); else next(); },1100); }
+    draw(); });
+  $("#bzStart").onclick=e=>{ e.target.remove(); $$(".art").forEach(b=>b.disabled=false); next(); draw(); timer=setInterval(()=>{ if(!document.getElementById("bzTime")){ clearInterval(timer); return; } t--; draw(); if(t<=0) end(); },1000); };
+  draw();
+}
+function viewPaare(){ return `<a class="back" href="#spiele">← Spiele</a><div class="game"><div class="gtop"><span id="ppTime">0s</span><span id="ppLeft">6 pairs left</span></div><div class="pgrid" id="pgrid"></div><div id="ppEnd"></div></div>`; }
+function wirePaare(){ const pairs=shuffle(gamePool().pairs).slice(0,6); const cards=shuffle(pairs.flatMap((p,i)=>[{i,t:p.de,s:"de",g:p.g},{i,t:p.en,s:"en"}]));
+  let sel=null, left=6, t0=Date.now(), pen=0, timer=setInterval(()=>{ const el=$("#ppTime"); if(!el){clearInterval(timer);return;} el.textContent=`${Math.round((Date.now()-t0)/1000)+pen}s`; },500);
+  $("#pgrid").innerHTML=cards.map((c,k)=>`<button class="pc ${c.s}" data-k="${k}">${esc(c.t)}</button>`).join("");
+  $$(".pc").forEach(b=>b.onclick=()=>{ const c=cards[+b.dataset.k]; if(b.classList.contains("done")) return;
+    if(c.s==="de") play(c.t,"F");
+    if(!sel){ sel=b; b.classList.add("sel"); return; }
+    if(sel===b){ b.classList.remove("sel"); sel=null; return; }
+    const a=cards[+sel.dataset.k];
+    if(a.i===c.i && a.s!==c.s){ [sel,b].forEach(x=>{x.classList.remove("sel"); x.classList.add("done");}); sel=null; left--; answered(true); $("#ppLeft").textContent=`${left} pairs left`;
+      if(!left){ clearInterval(timer); const secs=Math.round((Date.now()-t0)/1000)+pen, pts=Math.max(10,300-secs*5), best=state.hs.paare||0; if(pts>best){ state.hs.paare=pts; save(); } addXP(15);
+        $("#ppEnd").innerHTML=`<div class="result ok"><div class="big">${secs}s</div><p>${pts} pts · ${pts>best?"New best! 🎉":"Best: "+best+" pts"}</p><button class="btn primary" id="ppAgain" style="margin-top:8px">Play again</button></div>`; $("#ppAgain").onclick=()=>route(); } }
+    else { pen+=3; combo=0; [sel,b].forEach(x=>x.classList.add("bad")); const s1=sel; sel=null; setTimeout(()=>{ s1.classList.remove("bad","sel"); b.classList.remove("bad"); },600); }
+  });
+}
+
+/* ================= INFO ================= */
+function viewInfo(){
+  const opts=VOICES.map(v=>`<option value="${esc(v.name)}" ${state.settings.voice===v.name?"selected":""}>${esc(v.name)}</option>`).join("");
+  return `<div class="hero"><h1>Info</h1><p>Audio settings, what this course is aiming at, and what to add alongside it.</p></div>
+  <div class="sec-h">Audio</div>
+  <div class="card"><div id="audioInfo" class="small">${audioInfoHTML()}</div>
+    <div class="setrow"><label>Source</label><select id="setEngine"><option value="auto">Device voice if available (recommended)</option><option value="files">Course recordings</option></select></div>
+    ${VOICES.length?`<div class="setrow"><label>Voice</label><select id="setVoice"><option value="">Automatic (best available)</option>${opts}</select></div>`:""}
+    <div class="setrow"><label>Speed</label><input type="range" id="setRate" min="0.6" max="1.2" step="0.05" value="${state.settings.rate||1}"><span id="rateVal">${Math.round((state.settings.rate||1)*100)}%</span></div>
+    <div class="row"><button class="btn" id="setTest">🔊 Test: „Ich wohne in Chicago.“</button></div>
+    <details class="keys" style="margin-top:12px"><summary>How to get the best German voice</summary>
+      <p><b>Windows:</b> open this page in <b>Microsoft Edge</b>. It has natural German voices (Katja, Conrad). Chrome has „Google Deutsch“. The Claude desktop app has no German voices, so there the page uses the backup recordings.</p>
+      <p><b>iPhone:</b> Settings → Accessibility → Spoken Content → Voices → German. Download <b>Anna (Enhanced)</b> or another enhanced voice. The page uses it automatically.</p>
+      <p><b>Android:</b> Settings → Text-to-speech → Google engine → install German.</p></details>
+  </div>
+  <div class="sec-h">The target: Goethe-Zertifikat A2</div>
+  <div class="examgrid">
+    <div class="card"><h3>Lesen</h3><div class="big">30 Min</div><p class="small muted">4 parts: short articles, e-mails, ads, signs.</p></div>
+    <div class="card"><h3>Hören</h3><div class="big">30 Min</div><p class="small muted">4 parts: conversations, phone messages, announcements. <b>Trained in:</b> Hören.</p></div>
+    <div class="card"><h3>Schreiben</h3><div class="big">30 Min</div><p class="small muted">2 parts: short messages. <b>Trained in:</b> Schreiben, Tippen.</p></div>
+    <div class="card"><h3>Sprechen</h3><div class="big">15 Min</div><p class="small muted">3 parts, in pairs: about yourself, your life, planning together. <b>Trained in:</b> Sprechen, Denken.</p></div>
+  </div>
+  <div class="card">Each part is worth 25 points (100 in total), and you need 60 to pass. Goethe estimates 200–350 lessons of 45 minutes to reach A2. After Unit 6, ask Claude for an A1 mock exam; after Unit 12, an A2 mock.</div>
+  <div class="sec-h">Add alongside</div>
+  <div class="card"><b>Language Transfer — Complete German</b> (free audio). The method behind Brücke and Denken, as a full audio course for walks and commutes. <a href="https://www.languagetransfer.org/">languagetransfer.org</a></div>
+  <div class="card"><b>Goethe-Institut — Arbeit &amp; Beruf</b> (free). Native-speaker listening and workplace exercises, A1–C2. The voices in this course are computer-generated, so this fills that gap. <a href="https://www.goethe.de/de/m/spr/ueb/aub.html">goethe.de</a></div>`;
+}
+
+function wireInfo(){
+  const e=$("#setEngine"); if(e){ e.value=state.settings.engine||"auto"; e.onchange=()=>{ state.settings.engine=e.value; save(); $("#audioInfo").innerHTML=audioInfoHTML(); }; }
+  const v=$("#setVoice"); if(v) v.onchange=()=>{ state.settings.voice=v.value||null; save(); $("#audioInfo").innerHTML=audioInfoHTML(); play("Ich wohne in Chicago.","F"); };
+  const r=$("#setRate"); r.oninput=()=>{ state.settings.rate=+r.value; $("#rateVal").textContent=Math.round(r.value*100)+"%"; save(); };
+  $("#setTest").onclick=e=>play("Ich wohne in Chicago.","F",e.target);
+}
+/* ================= ROUTER ================= */
+function route(keepScroll){
+  stopAudio();
+  const h=(location.hash||"#heute").slice(1); let tab="heute", html="";
+  let m;
+  if((m=h.match(/^unit-(\d+)-(\d+)$/))){ const u=UNITS.find(x=>x.id===+m[1]&&x.full), i=+m[2]-1;
+    if(u&&STEPS[i]){ $("#app").innerHTML=viewStep(u,i); STEP_WIRE[STEPS[i].k](u,i); } else $("#app").innerHTML=viewHome(); }
+  else if((m=h.match(/^unit-(\d+)$/))){ const u=UNITS.find(x=>x.id===+m[1]&&x.full); $("#app").innerHTML=u?viewUnit(u):viewHome(); }
+  else if(h==="noten"){ tab=h; $("#app").innerHTML=viewGrades(); }
+  else if(h==="wiederholen"){ tab=h; $("#app").innerHTML=viewReview(); wireReview(); }
+  else if(h==="info"){ tab=h; $("#app").innerHTML=viewInfo(); wireInfo(); }
+  else if(h==="spiele"){ tab=h; $("#app").innerHTML=viewGames(); }
+  else if(h==="spiel-blitz"){ tab="spiele"; $("#app").innerHTML=viewBlitz(); wireBlitz(); }
+  else if(h==="spiel-paare"){ tab="spiele"; $("#app").innerHTML=viewPaare(); wirePaare(); }
+  else $("#app").innerHTML=viewHome();
+  $$("#tabs a").forEach(a=>a.classList.toggle("on",a.dataset.v===tab));
+  window.scrollTo(0,0);
+}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-say]"); if(b){e.preventDefault(); e.stopPropagation(); play(b.dataset.say,b.dataset.v,b.classList.contains("spk")?b:null);}});
+window.addEventListener("hashchange",()=>route());
+route();
+</script>
+</body>
+</html>
