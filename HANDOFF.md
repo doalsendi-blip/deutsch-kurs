@@ -34,6 +34,11 @@ mc, gaps, builder, tippen, write, speak, and a LESEN story (sentences with EN, g
 - The Claude desktop app has no German voices, so the learner should use Edge.
 
 ## Publishing
+GitHub Pages (public): https://doalsendi-blip.github.io/deutsch-kurs/ — every push to `main` redeploys `site/`
+via `.github/workflows/pages.yml`. `site/audio/` is git-ignored, so the Pages copy has no backup MP3s and plays
+through the device voice only. Progress is stored per browser (localStorage) on both hosts; it does not sync.
+
+Artifact:
 `publish_files` takes at most 256 files per call. There are 306 files (index + audio), so publish in
 two calls: the first with mode "replace", the second with mode "patch".
 The audio hash prefix in build.py (currently "v5|") must change whenever audio is regenerated, to bust caches.
