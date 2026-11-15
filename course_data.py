@@ -471,7 +471,173 @@ UNITS = [
     "chat": "Deutsch-Kurs, Unit 3 (A1→A2), Sprechen-Übung wie Goethe A2 Sprechen Teil 3 (gemeinsam etwas planen). Wir müssen einen Termin für ein Budget-Meeting nächste Woche finden. Erfinde deinen Kalender (Montag bis Freitag, mit einigen Terminen), aber zeig ihn mir nicht. Ich erfinde meinen. Wir verhandeln mit Sie, bis wir einen Termin finden. Danach korrigiere meine Fehler auf Englisch, besonders Wortstellung und Uhrzeiten.",
   },
 },
-{"id": 4, "level": "A1", "title": "Telefon & E-Mail", "en": "Phone calls and formal e-mail", "focus": "Modal verbs: können, müssen, möchten · e-mail openings and closings"},
+{
+  "id": 4, "level": "A1", "full": True,
+  "title": "Telefon & E-Mail", "en": "Phone calls and formal e-mail",
+  "goals": [
+    "Use three more sound shifts (-ght → -cht, y → g, -y → -ig)",
+    "Say what you can, must, and would like to do with können, müssen, möchten",
+    "Handle a work phone call (ask for someone, leave a message, spell your name) and write a formal e-mail",
+  ],
+  "bruecke": {
+    "intro": "Phone and e-mail German is mostly words you already know. The new piece is the modal verbs: can, must, would like. Two of them already look like English: kann/can, muss/must. First, three more sound shifts.",
+    "showSounds": False,
+    "cognates": [
+      {"de": "das Telefon", "en": "telephone", "g": "n"},
+      {"de": "die Nummer", "en": "number", "g": "f"},
+      {"de": "die Adresse", "en": "address", "g": "f"},
+      {"de": "der Kontakt", "en": "contact", "g": "m"},
+      {"de": "der Kunde", "en": "customer, client", "g": "m"},
+      {"de": "die Information", "en": "information", "g": "f"},
+      {"de": "die Präsentation", "en": "presentation", "g": "f"},
+      {"de": "das Formular", "en": "form (formulary)", "g": "n"},
+      {"de": "der Link", "en": "link", "g": "m"},
+      {"de": "das Update", "en": "update", "g": "n"},
+      {"de": "die Frage", "en": "question", "g": "f"},
+      {"de": "die Antwort", "en": "answer", "g": "f"},
+    ],
+    "rules": [
+      {"title": "English -gh / -ght → German -ch / -cht", "how": "English writes gh but no longer says it. German still says it, as ch.",
+       "ex": [["night", "die Nacht"], ["light", "das Licht"], ["eight", "acht"]],
+       "guess": [["to laugh", "lachen"], ["daughter", "die Tochter"], ["right (side)", "rechts"]]},
+      {"title": "English y → German g", "how": "At the start of a word or after a vowel, English y often matches German g.",
+       "ex": [["yesterday", "gestern"], ["to say", "sagen"], ["way", "der Weg"]],
+       "guess": [["yellow", "gelb"], ["to lay", "legen"], ["eye", "das Auge"]]},
+      {"title": "English -y → German -ig", "how": "Adjectives ending in -y in English often end in -ig in German.",
+       "ex": [["sunny", "sonnig"], ["hungry", "hungrig"], ["thirsty", "durstig"]],
+       "guess": [["windy", "windig"], ["salty", "salzig"], ["forty", "vierzig"]]},
+    ],
+    "extraTitle": "False friends in the office",
+    "extra": [
+      {"de": "eventuell", "en": "possibly, maybe — not 'eventually' (eventually = schließlich)"},
+      {"de": "das Personal", "en": "staff, personnel — not 'personal' (personal = persönlich)"},
+      {"de": "die Provision", "en": "commission (on sales) — not 'provision'"},
+      {"de": "sympathisch", "en": "likeable, nice — not 'sympathetic' (sympathetic = mitfühlend)"},
+      {"de": "ich muss nicht", "en": "I don't have to — not 'I must not' (must not = ich darf nicht)"},
+    ],
+  },
+  "vocab": [
+    {"de": "der Anruf", "en": "phone call", "g": "m"},
+    {"de": "die Nachricht", "en": "message", "g": "f"},
+    {"de": "die Telefonnummer", "en": "phone number", "g": "f"},
+    {"de": "die E-Mail-Adresse", "en": "e-mail address", "g": "f"},
+    {"de": "der Betreff", "en": "subject (line)", "g": "m"},
+    {"de": "der Anhang", "en": "attachment", "g": "m", "note": "im Anhang = attached"},
+    {"de": "können", "en": "can, to be able to", "g": "v", "note": "ich kann, er kann"},
+    {"de": "müssen", "en": "must, to have to", "g": "v", "note": "ich muss, er muss"},
+    {"de": "möchten", "en": "would like (to)", "g": "v", "note": "ich möchte, er möchte"},
+    {"de": "schicken", "en": "to send", "g": "v"},
+    {"de": "zurückrufen", "en": "to call back — separable", "g": "v", "note": "Ich rufe Sie zurück."},
+    {"de": "sprechen mit", "en": "to speak with", "g": "v", "note": "Ich möchte mit Herrn Weber sprechen."},
+    {"de": "erreichen", "en": "to reach (someone)", "g": "v"},
+    {"de": "buchstabieren", "en": "to spell", "g": "v"},
+    {"de": "wiederholen", "en": "to repeat", "g": "v", "note": "Not separable: Können Sie das wiederholen?"},
+    {"de": "langsam", "en": "slow, slowly", "g": "x"},
+    {"de": "Wie bitte?", "en": "Pardon? Sorry, what?", "g": "x"},
+    {"de": "Einen Moment, bitte.", "en": "One moment, please.", "g": "x"},
+    {"de": "Mit freundlichen Grüßen", "en": "Kind regards (formal e-mail closing)", "g": "x"},
+  ],
+  "dialog": {
+    "title": "Können Sie das buchstabieren?", "en": "David calls Mr. Weber because he needs numbers for a report.",
+    "lines": [
+      {"s": "W", "de": "Weber, guten Tag.", "en": "Weber, good afternoon."},
+      {"s": "M", "de": "Guten Tag, Herr Weber, hier ist David Miller. Ich habe eine Frage.", "en": "Hello Mr. Weber, this is David Miller. I have a question."},
+      {"s": "W", "de": "Ja, bitte?", "en": "Yes, go ahead."},
+      {"s": "M", "de": "Ich muss den Bericht bis Freitag schicken. Können Sie mir die Zahlen für Oktober geben?", "en": "I have to send the report by Friday. Can you give me the numbers for October?"},
+      {"s": "W", "de": "Ja, natürlich. Ich schicke Ihnen die Zahlen heute per E-Mail.", "en": "Yes, of course. I'll send you the numbers by e-mail today."},
+      {"s": "M", "de": "Super, danke. Möchten Sie den Bericht auch sehen?", "en": "Great, thanks. Would you like to see the report too?"},
+      {"s": "W", "de": "Ja, gern. Schicken Sie ihn bitte auch an Frau Schmidt.", "en": "Yes, please. Please send it to Ms. Schmidt too."},
+      {"s": "M", "de": "Wie bitte? Können Sie den Namen bitte buchstabieren?", "en": "Sorry? Can you spell the name, please?"},
+      {"s": "W", "de": "Schmidt: S, C, H, M, I, D, T.", "en": "Schmidt: S, C, H, M, I, D, T."},
+      {"s": "M", "de": "Danke! Ich schicke den Bericht am Donnerstag.", "en": "Thanks! I'll send the report on Thursday."},
+      {"s": "W", "de": "Perfekt. Auf Wiederhören, Herr Miller!", "en": "Perfect. Goodbye, Mr. Miller!"},
+      {"s": "M", "de": "Auf Wiederhören!", "en": "Goodbye!"},
+    ],
+  },
+  "hoeren": {
+    "intro": "Goethe A1 Hören, Teil 3: a phone message. Listen twice before you look at the questions. Listen for who is calling, what the problem is, and what he should do.",
+    "voice": "R",
+    "text": "Guten Tag, Herr Miller, hier spricht Anna Schmidt aus dem Controlling. Danke für Ihre E-Mail. Leider kann ich den Anhang nicht öffnen. Können Sie mir die Datei bitte noch einmal schicken? Ich muss den Bericht morgen um neun Uhr präsentieren. Sie können mich auch anrufen: null sechs neun, vier fünf sechs, sieben acht. Vielen Dank!",
+    "qs": [
+      {"q": "Who is calling?", "o": ["Mr. Weber from finance", "Anna Schmidt from Controlling", "Someone from IT"], "a": 1},
+      {"q": "What is the problem?", "o": ["She can't open the attachment", "The e-mail went to the wrong person", "The numbers are wrong"], "a": 0},
+      {"q": "What does she want him to do?", "o": ["Come to her office", "Call IT", "Send the file again"], "a": 2},
+      {"q": "When does she have to present the report?", "o": ["Today at 9:00", "Tomorrow at 9:00", "Tomorrow at 10:00"], "a": 1},
+    ],
+    "diktat": ["Können Sie das bitte wiederholen?", "Ich muss den Bericht schicken.", "Möchten Sie eine Nachricht hinterlassen?", "Ich rufe Sie später zurück."],
+  },
+  "denken": [
+    {"en": "I can", "de": "Ich kann.", "note": "können → ich kann. Like English: no ending (not 'I cans')."},
+    {"en": "I can come.", "de": "Ich kann kommen.", "note": "The second verb goes to the end in its dictionary form."},
+    {"en": "I can come tomorrow.", "de": "Ich kann morgen kommen.", "alt": ["Morgen kann ich kommen."], "note": "Everything else goes between the two verbs."},
+    {"en": "Can you call me back? (formal)", "de": "Können Sie mich zurückrufen?", "alt": ["Können Sie mich bitte zurückrufen?"], "note": "At the end, a separable verb stays in one piece: zurückrufen."},
+    {"en": "I have to send the report.", "de": "Ich muss den Bericht schicken.", "note": "müssen → ich muss (must). Bericht is masculine → den."},
+    {"en": "Unfortunately I have to work on Friday.", "de": "Am Freitag muss ich leider arbeiten.", "alt": ["Leider muss ich am Freitag arbeiten.", "Ich muss am Freitag leider arbeiten.", "Ich muss leider am Freitag arbeiten."], "note": "Time first → the modal stays in position 2 → the infinitive stays at the end."},
+    {"en": "I'd like to speak with Mr. Weber.", "de": "Ich möchte mit Herrn Weber sprechen.", "alt": ["Ich möchte gern mit Herrn Weber sprechen.", "Ich möchte bitte mit Herrn Weber sprechen."], "note": "After mit, Herr becomes Herrn. Take 'mit Herrn' as a chunk for now."},
+    {"en": "Would you like to leave a message? (formal)", "de": "Möchten Sie eine Nachricht hinterlassen?", "note": "Yes/no question: the modal comes first, the infinitive still goes last."},
+  ],
+  "grammar": [
+    {"h": "1 · Modal verbs: können, müssen, möchten",
+     "html": """<table class="tb"><tr><th></th><th>können<br><span class="small muted">can</span></th><th>müssen<br><span class="small muted">must</span></th><th>möchten<br><span class="small muted">would like</span></th></tr>
+     <tr><td>ich</td><td><b>kann</b></td><td><b>muss</b></td><td><b>möchte</b></td></tr>
+     <tr><td>du</td><td>kannst</td><td>musst</td><td>möchtest</td></tr>
+     <tr><td>er / sie / es</td><td><b>kann</b></td><td><b>muss</b></td><td><b>möchte</b></td></tr>
+     <tr><td>wir</td><td>können</td><td>müssen</td><td>möchten</td></tr>
+     <tr><td>ihr</td><td>könnt</td><td>müsst</td><td>möchtet</td></tr>
+     <tr><td>sie / Sie</td><td>können</td><td>müssen</td><td>möchten</td></tr></table>
+     <p class="small"><b>ich</b> and <b>er/sie/es</b> are identical and have no -t: <i>er kann</i>, not <s>er kannt</s>. können and müssen lose the umlaut in the singular: kann, muss. English works the same way: I can, he can.</p>"""},
+    {"h": "2 · The sentence bracket",
+     "html": """<p>The modal verb takes position 2. The main verb goes to the <b>very end</b>, unchanged. Everything else sits between them.</p>
+     <div class="slots"><span>Ich</span><span class="v">kann</span><span>morgen</span><span class="v">kommen.</span></div>
+     <div class="slots"><span>Ich</span><span class="v">muss</span><span>den Bericht bis Freitag</span><span class="v">schicken.</span></div>
+     <div class="slots"><span class="v">Können</span><span>Sie mich bitte</span><span class="v">zurückrufen?</span></div>
+     <p class="small">Same bracket as the separable verbs in Unit 3 (<i>Ich rufe Sie <b>an</b></i>), but now the whole verb goes to the end: <i>Ich kann Sie <b>anrufen</b></i>.</p>"""},
+    {"h": "3 · Polite, not pushy",
+     "html": """<p><b>möchten</b> (would like) is the polite way to say what you want: <i>Ich möchte mit Frau Schmidt sprechen.</i> At work, use it instead of <i>ich will</i> (I want), which sounds blunt.</p>
+     <p><b>Können Sie …?</b> is the standard polite request: <i>Können Sie das bitte wiederholen?</i> Put <b>bitte</b> after the subject.</p>
+     <div class="tip"><b>Trap:</b> <i>Ich muss nicht</i> = I don't <i>have</i> to. It does not mean "I must not".</div>"""},
+    {"h": "4 · Formal e-mail: openings and closings",
+     "html": """<table class="tb"><tr><th>To</th><th>Opening</th><th>Closing</th></tr>
+     <tr><td>unknown person / company</td><td>Sehr geehrte Damen und Herren,</td><td>Mit freundlichen Grüßen</td></tr>
+     <tr><td>a woman (formal)</td><td>Sehr geehrte Frau Schmidt,</td><td>Mit freundlichen Grüßen</td></tr>
+     <tr><td>a man (formal)</td><td>Sehr geehrte<b>r</b> Herr Weber,</td><td>Mit freundlichen Grüßen</td></tr>
+     <tr><td>a colleague you know (Sie)</td><td>Liebe Frau Schmidt, / Liebe<b>r</b> Herr Weber,</td><td>Viele Grüße / Beste Grüße</td></tr>
+     <tr><td>a colleague (du)</td><td>Hallo Anna, / Liebe Anna,</td><td>Viele Grüße / LG</td></tr></table>
+     <p class="small">After the comma, the first word of the e-mail starts with a <b>small letter</b> (unless it's a noun or Sie): „Sehr geehrte Frau Schmidt,<br>vielen Dank für Ihre E-Mail.“ No comma after the closing.</p>
+     <p class="small">Useful lines: <i>Im Anhang finden Sie …</i> (Attached you'll find …) · <i>Können Sie mir bitte … schicken?</i> · <i>Ich freue mich auf Ihre Antwort.</i> (I look forward to your reply.)</p>"""},
+  ],
+  "mc": [
+    {"q": "Er ___ heute nicht kommen. (can)", "o": ["kannt", "kann", "können", "kannst"], "a": 1, "why": "er/sie/es with a modal has no ending: er kann."},
+    {"q": "Ich muss den Bericht ___.", "o": ["schicke", "schickt", "schicken"], "a": 2, "why": "The second verb goes to the end in its dictionary form (infinitive)."},
+    {"q": "Which sentence is correct?", "o": ["Ich kann kommen morgen.", "Ich kann morgen kommen.", "Ich morgen kann kommen."], "a": 1, "why": "Modal in position 2, infinitive at the very end."},
+    {"q": "An e-mail to Mr. Weber, whom you don't know yet, starts:", "o": ["Sehr geehrte Herr Weber,", "Sehr geehrter Herr Weber,", "Hallo Herr Weber,"], "a": 1, "why": "Masculine: geehrte + r → Sehr geehrter Herr …"},
+    {"q": "On the phone you didn't understand. You say:", "o": ["Was?", "Wie bitte?", "Bitte schön."], "a": 1, "why": "Wie bitte? is the polite 'Sorry, what?'. Was? sounds rude."},
+    {"q": "„Ich muss am Samstag nicht arbeiten“ means…", "o": ["I must not work on Saturday.", "I don't have to work on Saturday.", "I can't work on Saturday."], "a": 1, "why": "müssen + nicht = not have to."},
+  ],
+  "gaps": [
+    {"q": "____ Sie das bitte wiederholen? (können)", "a": ["Können"]},
+    {"q": "Ich ____ heute bis 18 Uhr arbeiten. (müssen)", "a": ["muss"]},
+    {"q": "____ du einen Kaffee? (möchten)", "a": ["Möchtest"]},
+    {"q": "Können Sie mich morgen ____? (call back)", "a": ["zurückrufen"]},
+    {"q": "Mit freundlichen ____ (formal closing)", "a": ["Grüßen"]},
+  ],
+  "builder": [
+    {"w": ["Ich", "kann", "morgen", "kommen."], "a": ["Ich kann morgen kommen.", "Morgen kann ich kommen."], "en": "I can come tomorrow."},
+    {"w": ["Können", "Sie", "mich", "bitte", "zurückrufen?"], "a": ["Können Sie mich bitte zurückrufen?"], "en": "Can you call me back, please?"},
+    {"w": ["Ich", "möchte", "mit", "Frau", "Schmidt", "sprechen."], "a": ["Ich möchte mit Frau Schmidt sprechen."], "en": "I'd like to speak with Ms. Schmidt."},
+  ],
+  "tippen": ["Können Sie das bitte langsam wiederholen?", "Ich muss den Bericht bis Freitag schicken.", "Sehr geehrte Frau Schmidt, im Anhang finden Sie die Datei.", "Ich möchte mit Herrn Weber sprechen.", "Mit freundlichen Grüßen, David Miller"],
+  "write": {
+    "task": "Goethe A1 Schreiben, Teil 2 style. Ms. Schmidt couldn't open your attachment. Write her a formal e-mail (about 30–40 words). Include:",
+    "points": ["a correct formal opening and closing", "say sorry and that the file is attached again", "ask her to call you back today, and give your number"],
+    "model": "Sehr geehrte Frau Schmidt,\nvielen Dank für Ihre Nachricht. Entschuldigung! Im Anhang finden Sie die Datei noch einmal. Können Sie mich heute bitte zurückrufen? Meine Nummer ist 069 123 45.\nMit freundlichen Grüßen\nDavid Miller",
+  },
+  "speak": {
+    "goethe": "Goethe A1 Sprechen, Teil 3 (requests), on the phone: ask for someone, leave a message, spell your name, give your number. Useful lines:",
+    "prompts": ["Ich möchte bitte mit … sprechen.", "Kann er / sie mich zurückrufen?", "Können Sie das bitte wiederholen?", "Ich buchstabiere: …", "Meine Nummer ist …"],
+    "chat": "Deutsch-Kurs, Unit 4 (A1), Sprechen-Übung: ein Telefonat. Spiel bitte die Assistentin von Frau Schmidt. Ich rufe an und möchte mit Frau Schmidt sprechen, aber sie ist nicht im Büro. Frag mich, ob ich eine Nachricht hinterlassen möchte, frag nach meinem Namen (ich buchstabiere ihn) und nach meiner Telefonnummer. Sprich mit Sie. Danach tauschen wir die Rollen. Korrigiere meine Fehler kurz auf Englisch, besonders Modalverben und die Wortstellung (Infinitiv am Ende).",
+  },
+},
 {"id": 5, "level": "A1", "title": "Zahlen & Finanzen", "en": "Numbers, money, percentages, dates", "focus": "Large numbers · Prozent · ordinals for dates (am 3. März)"},
 {"id": 6, "level": "A1", "title": "Meetings & Kollegen", "en": "Running and joining a meeting", "focus": "Formal imperative · possessives (mein, Ihr, unser) · nicht vs. kein"},
 {"id": 7, "level": "A2", "title": "Über die Arbeit berichten", "en": "Reporting what you did", "focus": "Perfect tense with haben / sein"},
@@ -565,6 +731,36 @@ LESEN = {
     {"q": "„Halb zehn“ ist neun Uhr dreißig.", "a": True, "why": "halb zehn = halfway to ten = 9:30."},
     {"q": "Tom kommt zu früh.", "a": False, "why": "Er kommt zu spät: um 10:30, nicht um 9:30."},
     {"q": "Das neue Meeting ist am Montag um neun Uhr.", "a": True, "why": "„Wir machen es am Montag um neun Uhr.“"},
+  ],
+},
+4: {
+  "title": "Herr Braun?", "en": "Mr. Braun?", "genre": "Office · 3-minute story",
+  "sentences": [
+    {"de": "Tom muss heute einen Kunden anrufen.", "en": "Tom has to call a client today."},
+    {"de": "Der Kunde heißt Herr Becker.", "en": "The client's name is Mr. Becker."},
+    {"de": "Tom telefoniert nicht gern auf Deutsch.", "en": "Tom doesn't like making phone calls in German."},
+    {"de": "Am Telefon kann er die Leute nicht sehen, und alle sprechen so schnell.", "en": "On the phone he can't see the people, and everyone speaks so fast."},
+    {"de": "Er ruft an. Eine Frau antwortet: „Firma Becker, Lange, guten Tag.“", "en": "He calls. A woman answers: “Becker company, Lange speaking, good afternoon.”"},
+    {"de": "„Guten Tag, hier ist Tom Brown. Ich möchte bitte mit Herrn Becker sprechen.“", "en": "“Good afternoon, this is Tom Brown. I'd like to speak with Mr. Becker, please.”"},
+    {"de": "„Herr Becker ist leider nicht im Büro. Möchten Sie eine Nachricht hinterlassen?“", "en": "“Unfortunately Mr. Becker isn't in the office. Would you like to leave a message?”"},
+    {"de": "„Ja, gern. Kann er mich bitte zurückrufen?“", "en": "“Yes, please. Can he call me back, please?”"},
+    {"de": "„Natürlich. Wie ist Ihr Name, bitte?“", "en": "“Of course. What is your name, please?”"},
+    {"de": "„Brown. Ich buchstabiere: B, R, O, W, N.“", "en": "“Brown. I'll spell it: B, R, O, W, N.”"},
+    {"de": "Frau Lange schreibt den Namen auf.", "en": "Ms. Lange writes the name down."},
+    {"de": "Am Nachmittag klingelt Toms Telefon.", "en": "In the afternoon Tom's phone rings."},
+    {"de": "„Guten Tag, hier ist Becker. Spreche ich mit Herrn Braun?“", "en": "“Good afternoon, Becker here. Am I speaking with Mr. Braun?”"},
+    {"de": "Tom lacht: „Fast! Brown, mit W. Aber kein Problem.“", "en": "Tom laughs: “Almost! Brown, with a W. But no problem.”"},
+  ],
+  "gloss": {"kunden": "client, customer", "telefoniert": "makes phone calls", "gern": "gladly (nicht gern = doesn't like to)", "leute": "people",
+            "sehen": "see", "schnell": "fast", "antwortet": "answers", "möchte": "would like", "leider": "unfortunately", "nachricht": "message",
+            "hinterlassen": "leave (behind)", "zurückrufen": "call back", "natürlich": "of course", "buchstabiere": "spell (I spell)",
+            "schreibt": "writes (aufschreiben = write down)", "nachmittag": "afternoon", "klingelt": "rings", "spreche": "speak (am I speaking)", "fast": "almost"},
+  "qs": [
+    {"q": "Tom telefoniert gern auf Deutsch.", "a": False, "why": "„Tom telefoniert nicht gern auf Deutsch.“"},
+    {"q": "Herr Becker ist nicht im Büro.", "a": True, "why": "„Herr Becker ist leider nicht im Büro.“"},
+    {"q": "Tom hinterlässt eine Nachricht.", "a": True, "why": "Frau Lange fragt: „Möchten Sie eine Nachricht hinterlassen?“ Tom sagt: „Ja, gern.“"},
+    {"q": "Frau Lange ruft am Nachmittag zurück.", "a": False, "why": "Herr Becker ruft zurück, nicht Frau Lange."},
+    {"q": "Herr Becker sagt Toms Namen richtig.", "a": False, "why": "Er sagt „Herr Braun“, nicht „Herr Brown“."},
   ],
 },
 }

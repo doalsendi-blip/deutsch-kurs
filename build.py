@@ -2,7 +2,10 @@ import json, hashlib, os, re, subprocess, sys, wave
 import numpy as np
 sys.path.insert(0, os.path.dirname(__file__))
 from course_data import UNITS, SOUNDS
-from TTS.utils.synthesizer import Synthesizer
+try:
+    from TTS.utils.synthesizer import Synthesizer
+except ImportError:
+    Synthesizer = None   # no Coqui TTS here: reuse clips already published, skip new ones (device voice covers them)
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(BASE, "site")
@@ -52,7 +55,14 @@ for u in UNITS:
 need("Ich wohne in Chicago.")
 
 MESSAGES = {tts_key(u['hoeren']['text']) for u in UNITS if u.get('full')}
-syn = Synthesizer(tts_checkpoint=f"{VITS}/model_file.pth", tts_config_path=f"{VITS}/config.json", use_cuda=False)
+syn = Synthesizer(tts_checkpoint=f"{VITS}/model_file.pth", tts_config_path=f"{VITS}/config.json", use_cuda=False) if Synthesizer and os.path.isdir(VITS) else None
+OLD_AUD = {}
+if syn is None:
+    try:
+        m = re.search(r"const AUD = (\{.*?\});\n", open(os.path.join(OUT, "index.html"), encoding="utf-8").read())
+        OLD_AUD = json.loads(m.group(1)) if m else {}
+    except FileNotFoundError: pass
+    print(f"TTS not available: keeping {len(OLD_AUD)} published clips, new texts use the device voice only")
 
 def synth(v, text, path_wav, kind="normal"):
     sr = syn.output_sample_rate
@@ -81,10 +91,15 @@ def synth(v, text, path_wav, kind="normal"):
 
 aud = {}
 made = 0
+skipped = 0
 for (v, k) in sorted(pairs):
     h = hashlib.sha1(f"v5|{v}|{k}".encode()).hexdigest()[:10]
     fn = f"{v}{h}.mp3"
     mp3 = os.path.join(AUD_DIR, fn)
+    if not os.path.exists(mp3) and syn is None:
+        if OLD_AUD.get(f"{v}|{k}") == f"audio/{fn}": aud[f"{v}|{k}"] = f"audio/{fn}"
+        else: skipped += 1
+        continue
     if not os.path.exists(mp3):
         wav = mp3[:-4] + ".wav"
         synth(v, k, wav, 'message' if k in MESSAGES else 'normal')
@@ -98,4 +113,4 @@ html = (tpl.replace("__CSS__", open(os.path.join(BASE,"base.css"),encoding="utf-
            .replace("__AUD__", json.dumps(aud, ensure_ascii=False)))
 open(os.path.join(OUT, "index.html"), "w", encoding="utf-8").write(html)
 total = sum(os.path.getsize(os.path.join(AUD_DIR, f)) for f in os.listdir(AUD_DIR))
-print(f"clips: {len(aud)} (new {made}), audio total {total/1e6:.2f} MB, html {len(html)/1e3:.0f} KB")
+print(f"clips: {len(aud)} (new {made}, skipped {skipped}), audio total {total/1e6:.2f} MB, html {len(html)/1e3:.0f} KB")

@@ -9,7 +9,7 @@ transfer method (Language Transfer / Madrasa style), gamified (XP, streak, stars
 Learner: Zack. Native English plus Hebrew; also learning Arabic via Madrasa. Level: between beginner and A1.
 
 ## Files
-- `course_data.py` — ALL content. `UNITS` (12 units; 1–3 fully built, 4–12 are outlines), `SOUNDS`,
+- `course_data.py` — ALL content. `UNITS` (12 units; 1–4 fully built, 5–12 are outlines), `SOUNDS`,
   `LESEN` (one story per unit, merged into UNITS at the bottom of the file).
 - `template.html` — the app (single page). Placeholders: `__CSS__`, `__UNITS__`, `__SOUNDS__`, `__AUD__`.
 - `base.css` — base styles injected at `__CSS__`.
@@ -38,10 +38,16 @@ mc, gaps, builder, tippen, write, speak, and a LESEN story (sentences with EN, g
 two calls: the first with mode "replace", the second with mode "patch".
 The audio hash prefix in build.py (currently "v5|") must change whenever audio is regenerated, to bust caches.
 
+On a machine without Coqui TTS (e.g. the Windows PC), build.py still runs: it keeps the clips listed in the
+existing `site/index.html` and skips new texts, which then play through the device voice only. Unit 4's
+109 texts have no MP3 yet; regenerate on the TTS machine if a fallback is wanted. Publishing index.html alone
+(mode "patch") is enough when no new audio was made.
+
 ## Learner preferences
 Clear ordered tasks with explicit pass/fail and redo rules. Blunt feedback. No inventories of retired items.
 
 ## Next up
 1. The learner checks audio in Edge (Info → Audio → Test).
-2. Build Unit 4 (Telefon & E-Mail: modal verbs) in the same format.
-3. Optional: A2 versions of the stories (level tabs, as on learngermanwithgames.com).
+2. Publish the Unit 4 build (index.html only, mode "patch").
+3. Build Unit 5 (Zahlen & Finanzen) in the same format.
+4. Optional: A2 versions of the stories (level tabs, as on learngermanwithgames.com).
